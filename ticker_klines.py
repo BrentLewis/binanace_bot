@@ -69,14 +69,15 @@ tickers = clean_data()
 
 def change_klines_to_np():
     for i in range(len(klines)):
-        klines[i] = klines[i].values.ravel().view(NotImplementedType=[('Column here',int), ('column here', float)])
+        klines[i] = klines[i].values
+        klines[i] = klines[i].astype(np.float64)
 
     return print('klines is numpy')
 
-
 change_klines_to_np()
 
-        
+##Not currently being used, but handy with a pd.DataFrame
+
 Columns = ["Open time", "Open", "High", "Low", "Close", "Volume", "Close time", 
            "Quote asset volume", "Number of trades", "Taker buy base asset volume", 
            "Taker buy quote asset volume", "Can be ignored"]
