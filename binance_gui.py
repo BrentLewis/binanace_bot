@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-
+#############################This is not nearly finished. A lot of data points aren't connected 
 def indicator_widget(event):
     top_0 = Tk()
 #Indicator entry box, and button to run test
