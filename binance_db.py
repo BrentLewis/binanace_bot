@@ -76,7 +76,8 @@ class open_close(db.Model):
 
     def __repr__(self):
         return '<open_close %r>' % self.id
-
+#Between this comment line and the next all the functions are the same, they just call different time frames
+#I want to come back ot here and put in *args in the __init__ and make a class generator to cut out 200-300 lines
 ################################################################################################################################
 class i_5m(db.Model):
     id = db.Column('I_5m_id', db.Integer, primary_key = True)
@@ -600,7 +601,7 @@ def h_l_v_loop(a = 0):
     return print('inserted h_l_v')
 h_l_v_loop(a = 0)
 
-###These are all a repeat of the same finction
+###These are all a repeat of the same finction as well.
 #I'll build a decorator, or class not sure which is best yet, later for now it functions
 def _5m_():
 
