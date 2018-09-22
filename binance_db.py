@@ -603,6 +603,7 @@ h_l_v_loop(a = 0)
 
 ###These are all a repeat of the same finction as well.
 #I'll build a decorator, or class not sure which is best yet, later for now it functions
+#These are all meant to be called inside the indicators() function
 def _5m_():
 
     for a in range(len(Indicators['rsi'])):
