@@ -76,21 +76,3 @@ def change_klines_to_np():
 
 change_klines_to_np()
 
-##Not currently being used, but handy with a pd.DataFrame
-
-Columns = ["Open time", "Open", "High", "Low", "Close", "Volume", "Close time", 
-           "Quote asset volume", "Number of trades", "Taker buy base asset volume", 
-           "Taker buy quote asset volume", "Can be ignored"]
-
-#add in try/except for length mismatch error
-def get_labeled_data(klines, columns=Columns):
-    try:
-        for j, df in enumerate(klines):
-            df.columns = columns
-            klines[j] = df.drop("Can be ignored", axis = 1) # Drop column
-    except:
-        print('Its being dumb again')
-    return klines
-get_labeled_data(klines, columns=Columns)
-    
-
