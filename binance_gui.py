@@ -1,62 +1,126 @@
-import tkinter as tk
-top = tk.Tk()
+from tkinter import *
+from tkinter import ttk
 
-#menu bar at the top of the gui
-M = Menu ( master, option, ... )
+def indicator_widget(event):
+    top_0 = Tk()
+#Indicator entry box, and button to run test
+    Indicator= Label(top_0, text= 'Indicators')
 
-#drop down button. Use to select which indicators/klines
-m = Menubutton ( master, option, ... )
-m.grid()
-#pop up after indicators are selected, to input the parameters
-#used with label
-L1 = Label(top, text="User Name")
-L1.pack( side = LEFT)
-E1 = Entry(top, bd =5)
-E1.pack(side = RIGHT)
+    #Nest the button to run this to pull up another window prompting the parameters for selected indicators
+    select_btn= Button(top_0, text='Select Indicators')
+    ind_entry = Entry(top_0)
+    ind_entry.bind('<Return>', set_inds)
+    select_btn.bind('<Button-1>', set_inds)
+    def set_inds(event):
+        top_2 = Tk()
+        # Indicator scroll bar/ listbox
+        lb = Listbox(top_2, height=5)
+        yscroll = Scrollbar(top_2, orient=VERTICAL)
+        lb['yscrollcommand'] = yscroll.set
+        yscroll['command'] = lb.yview
 
-#This will be used with Entry, for the option to entry manually, or visually
-def sel():
-   selection = "Value = " + str(var.get())
-   label.config(text = selection)
+        Indicators = ['Commodity Channel Index', 'Parabolic SAR',
+                      'Money Flow Index', 'Bolinger Bands', 'StochRSI'
+                      'STOCH', 'EMA', 'RSI']
+        for indicator in Indicators:
+            lb.insert(0, indicator)
 
-root = Tk()
-var = DoubleVar()
-scale = Scale( root, variable = var )
-scale.pack(anchor=CENTER)
-
-button = Button(root, text="Get Scale Value", command=sel)
-button.pack(anchor=CENTER)
-
-label = Label(root)
-label.pack()
-
-
-#consider this instead of Menubutton. Undecided on which
-#probably menu button.. I think use this to scroll through the results for symbols that returned successful results
-Lb1 = Listbox ( top )
-Lb1.insert(1,'value')
-Lb1.insert(2,'value')
-Lb1.pack()
+        lb.grid(row=0, column=2, rowspan=2, sticky=N + S)
+        yscroll.grid(row=0, column=1, rowspan=2, sticky=N + S + E)
+   
+    #Indicator scroll bar/ listbox
+    lb= Listbox(top_0, height=5)
+    yscroll= Scrollbar(top_0, orient= VERTICAL)
+    lb['yscrollcommand'] = yscroll.set
+    yscroll['command'] = lb.yview
 
 
-#use to display the graphs and images from the test
-# stringvar() is going to be something for the images.. dunno what yet
-var = StringVar()
-label = Label( root, textvariable=var, relief=RAISED )
+    Use_lab=Label(top_0, text= 'Use all Indicators')
+    yes_radio=Radiobutton(top_0, text='yes', value=1)
+    no_radio=Radiobutton(top_0, text='no', value=2)
 
-var.set("I believe the connection to the image goes here")
-label.pack()
+    Indicators =['Commodity Channel Index','Parabolic SAR',
+                     'Money Flow Index','Bolinger Bands','StochRSI'
+                     'STOCH','EMA','RSI']
+    for indicator in Indicators:
+        lb.insert(0, indicator)
+    
+    def onselect(evt):
 
-#Use this to select through the display for different indicators/the color of the lines for the indicator.
-frame = Frame(root)
-frame.pack()
-
-bottomframe = Frame(root)
-bottomframe.pack( side = BOTTOM 
-
-#button to interact with. Most likely going to use to start the test
-B = Button( master, option=value, ... )
+        w = evt.widget
+        index = int(w.curselection()[0])
+        value = w.get(index)
+        ind_entry.insert(0, ', ')
+        return ind_entry.insert(0, '%s' % (value))
+#    return some value here like ('You selected item %d: "%s"' % (index, value))
 
 
+    lb.bind('<<ListboxSelect>>',onselect)
+
+    Indicator.grid(row=0,column=0,sticky=E+N)
+    select_btn.grid(row=1, column=0,sticky=E+N)
+    ind_entry.grid(row=0, column=1,sticky=E+N, padx=2)
+
+    lb.grid(row=0,column=2,rowspan=2,sticky=N+S)
+
+    Use_lab.grid(row=0,column=3,sticky=W+N)
+    yes_radio.grid(row=1, column=3,sticky=W+N)
+    no_radio.grid(row=2,column=3,sticky=W+N)
+
+    yscroll.grid(row=0, column=1, rowspan=2, sticky=N+S+E)
+    
+
+def symbol_widget(event):
+    top_1 = Tk()
+    #symbol scroll bar
+    Symbol_lab= Label(top_1, text= 'Symbols')
+    symb_set= Button(top_1, text='Set Symbols')
+    symb_entry = Entry(top_1)
+
+    symb_entry.bind('<Return>', quit_symb_window)
+    symb_set.bind('<Button-1>', quit_symb_window)
+
+    lb= Listbox(top_1, height=5)
+    yscroll= Scrollbar(top_1, orient= VERTICAL)
+    lb['yscrollcommand'] = yscroll.set
+    yscroll['command'] = lb.yview
+
+    def onselect(evt):
+
+        w = evt.widget
+        index = int(w.curselection()[0])
+        value = w.get(index)
+#    return some value here like ('You selected item %d: "%s"' % (index, value))
+    lb.bind('<<ListboxSelect>>',onselect)
+
+    Use_lab=Label(top_1, text= 'Use all Symbols')
+    yes_radio=Radiobutton(top_1, text='yes', value=1)
+    no_radio=Radiobutton(top_1, text='no', value=2)
+
+    Symbols = 'Query for symbols'
+    for symbol in Symbols:
+        lb.insert(0, indicator)
+
+    Symbol_lab.grid(row=0,column=0,sticky=E+N)
+    symb_set.grid(row=1, column=0,sticky=E+N)
+
+    lb.grid(row=0,column=1,rowspan=2,sticky=N+S)
+    yscroll.grid(row=0, column=1, rowspan=2, sticky=N+S+E)
+
+
+    Use_lab.grid(row=0,column=3,sticky=W+N)
+    yes_radio.grid(row=1, column=3,sticky=W+N)
+    no_radio.grid(row=2,column=3,sticky=W+N)
+
+
+
+top = Tk()
+
+indicator_btn = Button(top, text ='Select indicators', command = indicator_widget)
+symbol_btn = Button(top, text ='Select symbols', command = symbol_widget)
+
+
+indicator_btn.grid(row=0,column=0,sticky='en')
+symbol_btn.grid(row=0,column=1,sticky='wn')
 
 top.mainloop()
