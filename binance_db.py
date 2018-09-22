@@ -81,452 +81,389 @@ class open_close(db.Model):
 ################################################################################################################################
 class i_5m(db.Model):
     id = db.Column('I_5m_id', db.Integer, primary_key = True)
-    _5m_SMA = db.Column('SMA', db.VARCHAR(45))
-    _5m_ROC = db.Column('ROC', db.VARCHAR(45))
-    _5m_ROCP = db.Column('ROCP', db.VARCHAR(45))
-    _5m_ROCR = db.Column('ROCR', db.VARCHAR(45))
     _5m_RSI = db.Column('RSI', db.VARCHAR(45))
-    _5m_BB = db.Column('BB', db.VARCHAR(45))
+    _5m_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
+    _5m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _5m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _5m_EMA = db.Column('EMA', db.VARCHAR(45))
     _5m_MA = db.Column('MA', db.VARCHAR(45))
-    _5m_WMA = db.Column('WMA', db.VARCHAR(45))
-    _5m_KAMA = db.Column('KAMA', db.VARCHAR(45))
     _5m_MACD = db.Column('MACD', db.VARCHAR(45))
+    _5m_MACD_SIGNAL = db.Column('MACD_SIGNAL', db.VARCHAR(45))
+    _5m_MACD_HISTOGRAM = db.Column('MACD_HISTOGRAM', db.VARCHAR(45))
     _5m_STOCHRSI = db.Column('STOCHRSI', db.VARCHAR(45))
     _5m_SAR = db.Column('SAR', db.VARCHAR(45))
-    _5m_ATR = db.Column('ATR', db.VARCHAR(45))
-    _5m_NATR = db.Column('NATR', db.VARCHAR(45))
-    _5m_WR = db.Column('WR', db.VARCHAR(45))
-    _5m_CADL = db.Column('CADL', db.VARCHAR(45))
-    _5m_CADO = db.Column('CADO', db.VARCHAR(45))
-
+    _5m_STOCH_K = db.Column('SAR', db.VARCHAR(45))
+    _5m_STOCH_D = db.Column('SAR', db.VARCHAR(45))
+    _5m_CCI = db.Column('SAR', db.VARCHAR(45))
+    
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, SMA, ROC, ROCP,
-               ROCR, RSI, BB, EMA, MA, WMA,
-               KAMA, MACD, STOCHRSI, SAR,
-               ATR, NATR, WR, CADL, CADO ): #indicators __int__
-        self._5m_SMA = _5m_SMA
-        self._5m_ROC = _5m_ROC
-        self._5m_ROCP = _5m_ROCP
-        self._5m_ROCR = _5m_ROCR
-        self._5m_RSI = _5m_RSI
-        self._5m_BB = _5m_BB
-        self._5m_EMA = _5m_EMA
-        self._5m_MA =_5m_MA
-        self._5m_WMA = _5m_WMA
-        self._5m_KAMA = _5m_KAMA
-        self._5m_MACD = _5m_MACO
-        self._5m_STOCHRSI = _5m_STOCHRSI
-        self._5m_SAR = _5m_SAR
-        self._5m_ATR = _5m_ATR
-        self._m_NATR = _5m_NATR
-        self._5m_WR = _5m_WR
-        self._5m_CADL = _5m_CADL
-        self._5m_CADO = _5m_CADO
+    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+        
+        self._5m_RSI = _1h_RSI
+        self._5m_BBANDS_LOWER = _1h_BBANDS_LOWER
+        self._5m_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
+        self._5m_BBANDS_UPPER = _1h_BBANDS_UPPER
+        self._5m_EMA = _1h_EMA
+        self._5m_MA =_1h_MA
+        self._5m_MACD = _1h_MACD
+        self._5m_MACD_SIGNAL = _1h_MACD_SIGNAL
+        self._5m_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
+        self._5m_STOCHRSI = _1h_STOCHRSI
+        self._5m_SAR = _1h_SAR
+        self._5m_STOCH_K = _1h_STOCH_K
+        self._5m_STOCH_D = _1h_STOCH_D
+        self._5m_CCI = _1h_CCI
 
+       
     def __repr__(self):
         return '<I_5m %r>' % self.id
 
 
 class i_10m(db.Model):
     id = db.Column('I_10m_id', db.Integer, primary_key = True)
-    _10m_SMA = db.Column('SMA', db.VARCHAR(45))
-    _10m_ROC = db.Column('ROC', db.VARCHAR(45))
-    _10m_ROCP = db.Column('ROCP', db.VARCHAR(45))
-    _10m_ROCR = db.Column('ROCR', db.VARCHAR(45))
     _10m_RSI = db.Column('RSI', db.VARCHAR(45))
-    _10m_BB = db.Column('BB', db.VARCHAR(45))
+    _10m_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
+    _10m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _10m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _10m_EMA = db.Column('EMA', db.VARCHAR(45))
     _10m_MA = db.Column('MA', db.VARCHAR(45))
-    _10m_WMA = db.Column('WMA', db.VARCHAR(45))
-    _10m_KAMA = db.Column('KAMA', db.VARCHAR(45))
     _10m_MACD = db.Column('MACD', db.VARCHAR(45))
+    _10m_MACD_SIGNAL = db.Column('MACD_SIGNAL', db.VARCHAR(45))
+    _10m_MACD_HISTOGRAM = db.Column('MACD_HISTOGRAM', db.VARCHAR(45))
     _10m_STOCHRSI = db.Column('STOCHRSI', db.VARCHAR(45))
     _10m_SAR = db.Column('SAR', db.VARCHAR(45))
-    _10m_ATR = db.Column('ATR', db.VARCHAR(45))
-    _10m_NATR = db.Column('NATR', db.VARCHAR(45))
-    _10m_WR = db.Column('WR', db.VARCHAR(45))
-    _10m_CADL = db.Column('CADL', db.VARCHAR(45))
-    _10m_CADO = db.Column('CADO', db.VARCHAR(45))
-
+    _10m_STOCH_K = db.Column('SAR', db.VARCHAR(45))
+    _10m_STOCH_D = db.Column('SAR', db.VARCHAR(45))
+    _10m_CCI = db.Column('SAR', db.VARCHAR(45))
+    
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, SMA, ROC, ROCP,
-               ROCR, RSI, BB, EMA, MA, WMA,
-               KAMA, MACD, STOCHRSI, SAR,
-               ATR, NATR, WR, CADL, CADO ): #indicators __int__
-        self._10m_SMA = _10m_SMA
-        self._10m_ROC = _10m_ROC
-        self._10m_ROCP = _10m_ROCP
-        self._10m_ROCR = _10m_ROCR
-        self._10m_RSI = _10m_RSI
-        self._10m_BB = _10m_BB
-        self._10m_EMA = _10m_EMA
-        self._10m_MA =_10m_MA
-        self._10m_WMA = _10m_WMA
-        self._10m_KAMA = _10m_KAMA
-        self._10m_MACD = _10m_MACO
-        self._10m_STOCHRSI = _10m_STOCHRSI
-        self._10m_SAR = _10m_SAR
-        self._10m_ATR = _10m_ATR
-        self._10m_NATR = _10m_NATR
-        self._10m_WR = _10m_WR
-        self._10m_CADL = _10m_CADL
-        self._10m_CADO = _10m_CADO
+    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+        
+        self._10m_RSI = _1h_RSI
+        self._10m_BBANDS_LOWER = _1h_BBANDS_LOWER
+        self._10m_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
+        self._10m_BBANDS_UPPER = _1h_BBANDS_UPPER
+        self._10m_EMA = _1h_EMA
+        self._10m_MA =_1h_MA
+        self._10m_MACD = _1h_MACD
+        self._10m_MACD_SIGNAL = _1h_MACD_SIGNAL
+        self._10m_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
+        self._10m_STOCHRSI = _1h_STOCHRSI
+        self._10m_SAR = _1h_SAR
+        self._10m_STOCH_K = _1h_STOCH_K
+        self._10m_STOCH_D = _1h_STOCH_D
+        self._10m_CCI = _1h_CCI
 
     def __repr__(self):
         return '<I_10m %r>' % self.id
 
 class i_15m(db.Model):
     id = db.Column('I_15m_id', db.Integer, primary_key = True)
-    _15m_SMA = db.Column('SMA', db.VARCHAR(45))
-    _15m_ROC = db.Column('ROC', db.VARCHAR(45))
-    _15m_ROCP = db.Column('ROCP', db.VARCHAR(45))
-    _15m_ROCR = db.Column('ROCR', db.VARCHAR(45))
     _15m_RSI = db.Column('RSI', db.VARCHAR(45))
-    _15m_BB = db.Column('BB', db.VARCHAR(45))
+    _15m_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
+    _15m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _15m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _15m_EMA = db.Column('EMA', db.VARCHAR(45))
     _15m_MA = db.Column('MA', db.VARCHAR(45))
-    _15m_WMA = db.Column('WMA', db.VARCHAR(45))
-    _15m_KAMA = db.Column('KAMA', db.VARCHAR(45))
     _15m_MACD = db.Column('MACD', db.VARCHAR(45))
+    _15m_MACD_SIGNAL = db.Column('MACD_SIGNAL', db.VARCHAR(45))
+    _15m_MACD_HISTOGRAM = db.Column('MACD_HISTOGRAM', db.VARCHAR(45))
     _15m_STOCHRSI = db.Column('STOCHRSI', db.VARCHAR(45))
     _15m_SAR = db.Column('SAR', db.VARCHAR(45))
-    _15m_ATR = db.Column('ATR', db.VARCHAR(45))
-    _15m_NATR = db.Column('NATR', db.VARCHAR(45))
-    _15m_WR = db.Column('WR', db.VARCHAR(45))
-    _15m_CADL = db.Column('CADL', db.VARCHAR(45))
-    _15m_CADO = db.Column('CADO', db.VARCHAR(45))
-
+    _15m_STOCH_K = db.Column('SAR', db.VARCHAR(45))
+    _15m_STOCH_D = db.Column('SAR', db.VARCHAR(45))
+    _15m_CCI = db.Column('SAR', db.VARCHAR(45))
+    
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, SMA, ROC, ROCP,
-               ROCR, RSI, BB, EMA, MA, WMA,
-               KAMA, MACD, STOCHRSI, SAR,
-               ATR, NATR, WR, CADL, CADO ): #indicators __int__
-        self._15m_SMA = _15m_SMA
-        self._15m_ROC = _15m_ROC
-        self._15m_ROCP = _15m_ROCP
-        self._15m_ROCR = _15m_ROCR
-        self._15m_RSI = _15m_RSI
-        self._15m_BB = _15m_BB
-        self._15m_EMA = _15m_EMA
-        self._15m_MA =_15m_MA
-        self._15m_WMA = _15m_WMA
-        self._15m_KAMA = _15m_KAMA
-        self._15m_MACD = _15m_MACO
-        self._15m_STOCHRSI = _15m_STOCHRSI
-        self._15m_SAR = _15m_SAR
-        self._15m_ATR = _15m_ATR
-        self._15m_NATR = _15m_NATR
-        self._15m_WR = _15m_WR
-        self._15m_CADL = _15m_CADL
-        self._15m_CADO = _15m_CADO
+    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+        
+        self._15m_RSI = _1h_RSI
+        self._15m_BBANDS_LOWER = _1h_BBANDS_LOWER
+        self._15m_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
+        self._15m_BBANDS_UPPER = _1h_BBANDS_UPPER
+        self._15m_EMA = _1h_EMA
+        self._15m_MA =_1h_MA
+        self._15m_MACD = _1h_MACD
+        self._15m_MACD_SIGNAL = _1h_MACD_SIGNAL
+        self._15m_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
+        self._15m_STOCHRSI = _1h_STOCHRSI
+        self._15m_SAR = _1h_SAR
+        self._15m_STOCH_K = _1h_STOCH_K
+        self._15m_STOCH_D = _1h_STOCH_D
+        self._15m_CCI = _1h_CCI
 
     def __repr__(self):
         return '<I_15m %r>' % self.id
 
 class i_30m(db.Model):
     id = db.Column('I_30m_id', db.Integer, primary_key = True)
-    _30m_SMA = db.Column('SMA', db.VARCHAR(45))
-    _30m_ROC = db.Column('ROC', db.VARCHAR(45))
-    _30m_ROCP = db.Column('ROCP', db.VARCHAR(45))
-    _30m_ROCR = db.Column('ROCR', db.VARCHAR(45))
     _30m_RSI = db.Column('RSI', db.VARCHAR(45))
-    _30m_BB = db.Column('BB', db.VARCHAR(45))
+    _30m_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
+    _30m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _30m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _30m_EMA = db.Column('EMA', db.VARCHAR(45))
     _30m_MA = db.Column('MA', db.VARCHAR(45))
-    _30m_WMA = db.Column('WMA', db.VARCHAR(45))
-    _30m_KAMA = db.Column('KAMA', db.VARCHAR(45))
     _30m_MACD = db.Column('MACD', db.VARCHAR(45))
+    _30m_MACD_SIGNAL = db.Column('MACD_SIGNAL', db.VARCHAR(45))
+    _30m_MACD_HISTOGRAM = db.Column('MACD_HISTOGRAM', db.VARCHAR(45))
     _30m_STOCHRSI = db.Column('STOCHRSI', db.VARCHAR(45))
     _30m_SAR = db.Column('SAR', db.VARCHAR(45))
-    _30m_ATR = db.Column('ATR', db.VARCHAR(45))
-    _30m_NATR = db.Column('NATR', db.VARCHAR(45))
-    _30m_WR = db.Column('WR', db.VARCHAR(45))
-    _30m_CADL = db.Column('CADL', db.VARCHAR(45))
-    _30m_CADO = db.Column('CADO', db.VARCHAR(45))
-
+    _30m_STOCH_K = db.Column('SAR', db.VARCHAR(45))
+    _30m_STOCH_D = db.Column('SAR', db.VARCHAR(45))
+    _30m_CCI = db.Column('SAR', db.VARCHAR(45))
+    
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, SMA, ROC, ROCP,
-               ROCR, RSI, BB, EMA, MA, WMA,
-               KAMA, MACD, STOCHRSI, SAR,
-               ATR, NATR, WR, CADL, CADO ): #indicators __int__
-        self._30m_SMA = _30m_SMA
-        self._30m_ROC = _30m_ROC
-        self._30m_ROCP = _30m_ROCP
-        self._30m_ROCR = _30m_ROCR
-        self._30m_RSI = _30m_RSI
-        self._30m_BB = _30m_BB
-        self._30m_EMA = _30m_EMA
-        self._30m_MA =_30m_MA
-        self._30m_WMA = _30m_WMA
-        self._30m_KAMA = _30m_KAMA
-        self._30m_MACD = _30m_MACO
-        self._30m_STOCHRSI = _30m_STOCHRSI
-        self._30m_SAR = _30m_SAR
-        self._30m_ATR = _30m_ATR
-        self._30m_NATR = _30m_NATR
-        self._30m_WR = _30m_WR
-        self._30m_CADL = _30m_CADL
-        self._30m_CADO = _30m_CADO
+    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+        
+        self._30m_RSI = _1h_RSI
+        self._30m_BBANDS_LOWER = _1h_BBANDS_LOWER
+        self._30m_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
+        self._30m_BBANDS_UPPER = _1h_BBANDS_UPPER
+        self._30m_EMA = _1h_EMA
+        self._30m_MA =_1h_MA
+        self._30m_MACD = _1h_MACD
+        self._30m_MACD_SIGNAL = _1h_MACD_SIGNAL
+        self._30m_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
+        self._30m_STOCHRSI = _1h_STOCHRSI
+        self._30m_SAR = _1h_SAR
+        self._30m_STOCH_K = _1h_STOCH_K
+        self._30m_STOCH_D = _1h_STOCH_D
+        self._30m_CCI = _1h_CCI
+
 
     def __repr__(self):
         return '<I_30m %r>' % self.id
 
 class i_1h(db.Model):
     id = db.Column('I_1h_id', db.Integer, primary_key = True)
-    _1h_SMA = db.Column('SMA', db.VARCHAR(45))
-    _1h_ROC = db.Column('ROC', db.VARCHAR(45))
-    _1h_ROCP = db.Column('ROCP', db.VARCHAR(45))
-    _1h_ROCR = db.Column('ROCR', db.VARCHAR(45))
+    id = db.Column('I_1h_id', db.Integer, primary_key = True)
     _1h_RSI = db.Column('RSI', db.VARCHAR(45))
-    _1h_BB = db.Column('BB', db.VARCHAR(45))
+    _1h_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
+    _1h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _1h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _1h_EMA = db.Column('EMA', db.VARCHAR(45))
     _1h_MA = db.Column('MA', db.VARCHAR(45))
-    _1h_WMA = db.Column('WMA', db.VARCHAR(45))
-    _1h_KAMA = db.Column('KAMA', db.VARCHAR(45))
     _1h_MACD = db.Column('MACD', db.VARCHAR(45))
+    _1h_MACD_SIGNAL = db.Column('MACD_SIGNAL', db.VARCHAR(45))
+    _1h_MACD_HISTOGRAM = db.Column('MACD_HISTOGRAM', db.VARCHAR(45))
     _1h_STOCHRSI = db.Column('STOCHRSI', db.VARCHAR(45))
     _1h_SAR = db.Column('SAR', db.VARCHAR(45))
-    _1h_ATR = db.Column('ATR', db.VARCHAR(45))
-    _1h_NATR = db.Column('NATR', db.VARCHAR(45))
-    _1h_WR = db.Column('WR', db.VARCHAR(45))
-    _1h_CADL = db.Column('CADL', db.VARCHAR(45))
-    _1h_CADO = db.Column('CADO', db.VARCHAR(45))
-
+    _1h_STOCH_K = db.Column('SAR', db.VARCHAR(45))
+    _1h_STOCH_D = db.Column('SAR', db.VARCHAR(45))
+    _1h_CCI = db.Column('SAR', db.VARCHAR(45))
+    
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, SMA, ROC, ROCP,
-               ROCR, RSI, BB, EMA, MA, WMA,
-               KAMA, MACD, STOCHRSI, SAR,
-               ATR, NATR, WR, CADL, CADO ): #indicators __int__
-        self._1h_SMA = _1h_SMA
-        self._1h_ROC = _1h_ROC
-        self._1h_ROCP = _1h_ROCP
-        self._1h_ROCR = _1h_ROCR
+    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+        
         self._1h_RSI = _1h_RSI
-        self._1h_BB = _1h_BB
+        self._1h_BBANDS_LOWER = _1h_BBANDS_LOWER
+        self._1h_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
+        self._1h_BBANDS_UPPER = _1h_BBANDS_UPPER
         self._1h_EMA = _1h_EMA
         self._1h_MA =_1h_MA
-        self._1h_WMA = _1h_WMA
-        self._1h_KAMA = _1h_KAMA
-        self._1h_MACD = _1h_MACO
+        self._1h_MACD = _1h_MACD
+        self._1h_MACD_SIGNAL = _1h_MACD_SIGNAL
+        self._1h_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
         self._1h_STOCHRSI = _1h_STOCHRSI
         self._1h_SAR = _1h_SAR
-        self._1h_ATR = _1h_ATR
-        self._1h_NATR = _1h_NATR
-        self._1h_WR = _1h_WR
-        self._1h_CADL = _1h_CADL
-        self._1h_CADO = _1h_CADO
+        self._1h_STOCH_K = _1h_STOCH_K
+        self._1h_STOCH_D = _1h_STOCH_D
+        self._1h_CCI = _1h_CCI
 
+       
     def __repr__(self):
         return '<I_1h %r>' % self.id
 
 class i_2h(db.Model):
     id = db.Column('I_2h_id', db.Integer, primary_key = True)
-    _2h_SMA = db.Column('SMA', db.VARCHAR(45))
-    _2h_ROC = db.Column('ROC', db.VARCHAR(45))
-    _2h_ROCP = db.Column('ROCP', db.VARCHAR(45))
-    _2h_ROCR = db.Column('ROCR', db.VARCHAR(45))
+    id = db.Column('I_1h_id', db.Integer, primary_key = True)
     _2h_RSI = db.Column('RSI', db.VARCHAR(45))
-    _2h_BB = db.Column('BB', db.VARCHAR(45))
+    _2h_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
+    _2h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _2h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _2h_EMA = db.Column('EMA', db.VARCHAR(45))
     _2h_MA = db.Column('MA', db.VARCHAR(45))
-    _2h_WMA = db.Column('WMA', db.VARCHAR(45))
-    _2h_KAMA = db.Column('KAMA', db.VARCHAR(45))
     _2h_MACD = db.Column('MACD', db.VARCHAR(45))
+    _2h_MACD_SIGNAL = db.Column('MACD_SIGNAL', db.VARCHAR(45))
+    _2h_MACD_HISTOGRAM = db.Column('MACD_HISTOGRAM', db.VARCHAR(45))
     _2h_STOCHRSI = db.Column('STOCHRSI', db.VARCHAR(45))
     _2h_SAR = db.Column('SAR', db.VARCHAR(45))
-    _2h_ATR = db.Column('ATR', db.VARCHAR(45))
-    _2h_NATR = db.Column('NATR', db.VARCHAR(45))
-    _2h_WR = db.Column('WR', db.VARCHAR(45))
-    _2h_CADL = db.Column('CADL', db.VARCHAR(45))
-    _2h_CADO = db.Column('CADO', db.VARCHAR(45))
-
+    _2h_STOCH_K = db.Column('SAR', db.VARCHAR(45))
+    _2h_STOCH_D = db.Column('SAR', db.VARCHAR(45))
+    _2h_CCI = db.Column('SAR', db.VARCHAR(45))
+    
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, SMA, ROC, ROCP,
-               ROCR, RSI, BB, EMA, MA, WMA,
-               KAMA, MACD, STOCHRSI, SAR,
-               ATR, NATR, WR, CADL, CADO ): #indicators __int__
-        self._2h_SMA = _2h_SMA
-        self._2h_ROC = _2h_ROC
-        self._2h_ROCP = _2h_ROCP
-        self._2h_ROCR = _2h_ROCR
-        self._2h_RSI = _2h_RSI
-        self._2h_BB = _2h_BB
-        self._2h_EMA = _2h_EMA
-        self._2h_MA =_2h_MA
-        self._2h_WMA = _2h_WMA
-        self._2h_KAMA = _2h_KAMA
-        self._2h_MACD = _2h_MACO
-        self._2h_STOCHRSI = _2h_STOCHRSI
-        self._2h_SAR = _2h_SAR
-        self._2h_ATR = _2h_ATR
-        self._2h_NATR = _2h_NATR
-        self._2h_WR = _2h_WR
-        self._2h_CADL = _2h_CADL
-        self._2h_CADO = _2h_CADO
+    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+        
+        self._2h_RSI = _1h_RSI
+        self._2h_BBANDS_LOWER = _1h_BBANDS_LOWER
+        self._2h_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
+        self._2h_BBANDS_UPPER = _1h_BBANDS_UPPER
+        self._2h_EMA = _1h_EMA
+        self._2h_MA =_1h_MA
+        self._2h_MACD = _1h_MACD
+        self._2h_MACD_SIGNAL = _1h_MACD_SIGNAL
+        self._2h_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
+        self._2h_STOCHRSI = _1h_STOCHRSI
+        self._2h_SAR = _1h_SAR
+        self._2h_STOCH_K = _1h_STOCH_K
+        self._2h_STOCH_D = _1h_STOCH_D
+        self._2h_CCI = _1h_CCI
 
+       
     def __repr__(self):
         return '<I_2h %r>' % self.id
 
 class i_4h(db.Model):
     id = db.Column('I_4h_id', db.Integer, primary_key = True)
-    _4h_SMA = db.Column('SMA', db.VARCHAR(45))
-    _4h_ROC = db.Column('ROC', db.VARCHAR(45))
-    _4h_ROCP = db.Column('ROCP', db.VARCHAR(45))
-    _4h_ROCR = db.Column('ROCR', db.VARCHAR(45))
     _4h_RSI = db.Column('RSI', db.VARCHAR(45))
-    _4h_BB = db.Column('BB', db.VARCHAR(45))
+    _4h_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
+    _4h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _4h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _4h_EMA = db.Column('EMA', db.VARCHAR(45))
     _4h_MA = db.Column('MA', db.VARCHAR(45))
-    _4h_WMA = db.Column('WMA', db.VARCHAR(45))
-    _4h_KAMA = db.Column('KAMA', db.VARCHAR(45))
     _4h_MACD = db.Column('MACD', db.VARCHAR(45))
+    _4h_MACD_SIGNAL = db.Column('MACD_SIGNAL', db.VARCHAR(45))
+    _4h_MACD_HISTOGRAM = db.Column('MACD_HISTOGRAM', db.VARCHAR(45))
     _4h_STOCHRSI = db.Column('STOCHRSI', db.VARCHAR(45))
     _4h_SAR = db.Column('SAR', db.VARCHAR(45))
-    _4h_ATR = db.Column('ATR', db.VARCHAR(45))
-    _4h_NATR = db.Column('NATR', db.VARCHAR(45))
-    _4h_WR = db.Column('WR', db.VARCHAR(45))
-    _4h_CADL = db.Column('CADL', db.VARCHAR(45))
-    _4h_CADO = db.Column('CADO', db.VARCHAR(45))
-
+    _4h_STOCH_K = db.Column('SAR', db.VARCHAR(45))
+    _4h_STOCH_D = db.Column('SAR', db.VARCHAR(45))
+    _4h_CCI = db.Column('SAR', db.VARCHAR(45))
+    
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, SMA, ROC, ROCP,
-               ROCR, RSI, BB, EMA, MA, WMA,
-               KAMA, MACD, STOCHRSI, SAR,
-               ATR, NATR, WR, CADL, CADO ): #indicators __int__
-        self._4h_SMA = _4h_SMA
-        self._4h_ROC = _4h_ROC
-        self._4h_ROCP = _4h_ROCP
-        self._4h_ROCR = _4h_ROCR
-        self._4h_RSI = _4h_RSI
-        self._4h_BB = _4h_BB
-        self._4h_EMA = _4h_EMA
-        self._4h_MA =_4h_MA
-        self._4h_WMA = _4h_WMA
-        self._4h_KAMA = _4h_KAMA
-        self._4h_MACD = _4h_MACO
-        self._4h_STOCHRSI = _4h_STOCHRSI
-        self._4h_SAR = _4h_SAR
-        self._4h_ATR = _4_ATR
-        self._4h_NATR = _4h_NATR
-        self._4h_WR = _4h_WR
-        self._4h_CADL = _4h_CADL
-        self._4h_CADO = _4h_CADO
+    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+        
+        self._4h_RSI = _1h_RSI
+        self._4h_BBANDS_LOWER = _1h_BBANDS_LOWER
+        self._4h_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
+        self._4h_BBANDS_UPPER = _1h_BBANDS_UPPER
+        self._4h_EMA = _1h_EMA
+        self._4h_MA =_1h_MA
+        self._4h_MACD = _1h_MACD
+        self._4h_MACD_SIGNAL = _1h_MACD_SIGNAL
+        self._4h_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
+        self._4h_STOCHRSI = _1h_STOCHRSI
+        self._4h_SAR = _1h_SAR
+        self._4h_STOCH_K = _1h_STOCH_K
+        self._4h_STOCH_D = _1h_STOCH_D
+        self._4h_CCI = _1h_CCI
 
+       
     def __repr__(self):
         return '<I_4h %r>' % self.id
 
 class i_6h(db.Model):
     id = db.Column('I_6h_id', db.Integer, primary_key = True)
-    _6h_SMA = db.Column('SMA', db.VARCHAR(45))
-    _6h_ROC = db.Column('ROC', db.VARCHAR(45))
-    _6h_ROCP = db.Column('ROCP', db.VARCHAR(45))
-    _6h_ROCR = db.Column('ROCR', db.VARCHAR(45))
     _6h_RSI = db.Column('RSI', db.VARCHAR(45))
-    _6h_BB = db.Column('BB', db.VARCHAR(45))
+    _6h_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
+    _6h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _6h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _6h_EMA = db.Column('EMA', db.VARCHAR(45))
     _6h_MA = db.Column('MA', db.VARCHAR(45))
-    _6h_WMA = db.Column('WMA', db.VARCHAR(45))
-    _6h_KAMA = db.Column('KAMA', db.VARCHAR(45))
     _6h_MACD = db.Column('MACD', db.VARCHAR(45))
+    _6h_MACD_SIGNAL = db.Column('MACD_SIGNAL', db.VARCHAR(45))
+    _6h_MACD_HISTOGRAM = db.Column('MACD_HISTOGRAM', db.VARCHAR(45))
     _6h_STOCHRSI = db.Column('STOCHRSI', db.VARCHAR(45))
     _6h_SAR = db.Column('SAR', db.VARCHAR(45))
-    _6h_ATR = db.Column('ATR', db.VARCHAR(45))
-    _6h_NATR = db.Column('NATR', db.VARCHAR(45))
-    _6h_WR = db.Column('WR', db.VARCHAR(45))
-    _6h_CADL = db.Column('CADL', db.VARCHAR(45))
-    _6h_CADO = db.Column('CADO', db.VARCHAR(45))
-
+    _6h_STOCH_K = db.Column('SAR', db.VARCHAR(45))
+    _6h_STOCH_D = db.Column('SAR', db.VARCHAR(45))
+    _6h_CCI = db.Column('SAR', db.VARCHAR(45))
+    
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, SMA, ROC, ROCP,
-               ROCR, RSI, BB, EMA, MA, WMA,
-               KAMA, MACD, STOCHRSI, SAR,
-               ATR, NATR, WR, CADL, CADO ): #indicators __int__
-        self._6h_SMA = _6h_SMA
-        self._6h_ROC = _6h_ROC
-        self._6h_ROCP = _6h_ROCP
-        self._6h_ROCR = _6h_ROCR
-        self._6h_RSI = _6h_RSI
-        self._6h_BB = _6h_BB
-        self._6h_EMA = _6h_EMA
-        self._6h_MA =_6h_MA
-        self._6h_WMA = _6h_WMA
-        self._6h_KAMA = _6h_KAMA
-        self._6h_MACD = _6h_MACO
-        self._6h_STOCHRSI = _6h_STOCHRSI
-        self._6h_SAR = _6h_SAR
-        self._6h_ATR = _6h_ATR
-        self._6h_NATR = _6h_NATR
-        self._6h_WR = _6h_WR
-        self._6h_CADL = _6h_CADL
-        self._6h_CADO = _6h_CADO
+    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+        
+        self._6h_RSI = _1h_RSI
+        self._6h_BBANDS_LOWER = _1h_BBANDS_LOWER
+        self._6h_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
+        self._6h_BBANDS_UPPER = _1h_BBANDS_UPPER
+        self._6h_EMA = _1h_EMA
+        self._6h_MA =_1h_MA
+        self._6h_MACD = _1h_MACD
+        self._6h_MACD_SIGNAL = _1h_MACD_SIGNAL
+        self._6h_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
+        self._6h_STOCHRSI = _1h_STOCHRSI
+        self._6h_SAR = _1h_SAR
+        self._6h_STOCH_K = _1h_STOCH_K
+        self._6h_STOCH_D = _1h_STOCH_D
+        self._6h_CCI = _1h_CCI
 
+       
     def __repr__(self):
         return '<I_6h %r>' % self.id
 
 class i_12h(db.Model):
     id = db.Column('I_12h_id', db.Integer, primary_key = True)
-    _12h_SMA = db.Column('SMA', db.VARCHAR(45))
-    _12h_ROC = db.Column('ROC', db.VARCHAR(45))
-    _12h_ROCP = db.Column('ROCP', db.VARCHAR(45))
-    _12h_ROCR = db.Column('ROCR', db.VARCHAR(45))
     _12h_RSI = db.Column('RSI', db.VARCHAR(45))
-    _12h_BB = db.Column('BB', db.VARCHAR(45))
+    _12h_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
+    _12h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _12h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _12h_EMA = db.Column('EMA', db.VARCHAR(45))
     _12h_MA = db.Column('MA', db.VARCHAR(45))
-    _12h_WMA = db.Column('WMA', db.VARCHAR(45))
-    _12h_KAMA = db.Column('KAMA', db.VARCHAR(45))
     _12h_MACD = db.Column('MACD', db.VARCHAR(45))
+    _12h_MACD_SIGNAL = db.Column('MACD_SIGNAL', db.VARCHAR(45))
+    _12h_MACD_HISTOGRAM = db.Column('MACD_HISTOGRAM', db.VARCHAR(45))
     _12h_STOCHRSI = db.Column('STOCHRSI', db.VARCHAR(45))
     _12h_SAR = db.Column('SAR', db.VARCHAR(45))
-    _12h_ATR = db.Column('ATR', db.VARCHAR(45))
-    _12h_NATR = db.Column('NATR', db.VARCHAR(45))
-    _12h_WR = db.Column('WR', db.VARCHAR(45))
-    _12h_CADL = db.Column('CADL', db.VARCHAR(45))
-    _12h_CADO = db.Column('CADO', db.VARCHAR(45))
-
+    _12h_STOCH_K = db.Column('SAR', db.VARCHAR(45))
+    _12h_STOCH_D = db.Column('SAR', db.VARCHAR(45))
+    _12h_CCI = db.Column('SAR', db.VARCHAR(45))
+    
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, SMA, ROC, ROCP,
-               ROCR, RSI, BB, EMA, MA, WMA,
-               KAMA, MACD, STOCHRSI, SAR,
-               ATR, NATR, WR, CADL, CADO ): #indicators __int__
-        self._12h_SMA = _12h_SMA
-        self._12h_ROC = _12h_ROC
-        self._12h_ROCP = _12h_ROCP
-        self._12h_ROCR = _12h_ROCR
-        self._12h_RSI = _12h_RSI
-        self._12h_BB = _12h_BB
-        self._12h_EMA = _12h_EMA
-        self._12h_MA =_12h_MA
-        self._12h_WMA = _12h_WMA
-        self._12h_KAMA = _12h_KAMA
-        self._12h_MACD = _12h_MACO
-        self._12h_STOCHRSI = _12h_STOCHRSI
-        self._12h_SAR = _12h_SAR
-        self._12h_ATR = _12h_ATR
-        self._12h_NATR = _12h_NATR
-        self._12h_WR = _12h_WR
-        self._12h_CADL = _12h_CADL
-        self._12h_CADO = _12h_CADO
+    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+        
+        self._12h_RSI = _1h_RSI
+        self._12h_BBANDS_LOWER = _1h_BBANDS_LOWER
+        self._12h_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
+        self._12h_BBANDS_UPPER = _1h_BBANDS_UPPER
+        self._12h_EMA = _1h_EMA
+        self._12h_MA =_1h_MA
+        self._12h_MACD = _1h_MACD
+        self._12h_MACD_SIGNAL = _1h_MACD_SIGNAL
+        self._12h_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
+        self._12h_STOCHRSI = _1h_STOCHRSI
+        self._12h_SAR = _1h_SAR
+        self._12h_STOCH_K = _1h_STOCH_K
+        self._12h_STOCH_D = _1h_STOCH_D
+        self._12h_CCI = _1h_CCI
 
+       
     def __repr__(self):
         return '<I_12h %r>' % self.id
 #####################################################################################################################################    
