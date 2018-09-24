@@ -81,7 +81,7 @@ tickers = clean_data()
 
 
 #Slicing to the different time frames. 
-#all the time frame functions to be broken down into one function, and fill a single list to push into change_klines_to_np()
+#all the time frames sliced and generated, and fill a single list to push into change_klines_to_np()
 #volume needs to be summed for each frame
 def get_time_frames():
     _5m=klines
