@@ -85,66 +85,42 @@ tickers = clean_data()
 #volume needs to be summed for each frame
 _10m=[]        
 def _10m_(df=0):
-    if df < len(klines):
+    for df in range(len(klines)):
         _10m.append(klines[df].iloc[0::2])
-        _10m_(df=df+1)
-    else:
-        print('generated 10min')
 
 _15m=[]        
 def _15m_(df=0):
-    if df < len(klines):
+    for df in range(len(klines)):
         _15m.append(klines[df].iloc[0::3])
-        _15m_(df=df+1)
-    else:
-        print('generated 15 min')
 
 _30m=[]        
 def _30m_(df=0):
-    if df < len(klines):
+    for df in range(len(klines)):
         _30m.append(klines[df].iloc[0::6])
-        _30m_(df=df+1)
-    else:
-        print('generated 30 min')
 
 _1h=[]        
 def _1h_(df=0):
-    if df < len(klines):
+    for df in range(len(klines)):
         _1h.append(klines[df].iloc[0::12])
-        _1h_(df=df+1)
-    else:
-        print('generated 1 hour')
 _2h=[]        
 def _2h_(df=0):
-    if df < len(klines):
+    for df in range(len(klines)):
         _2h.append(klines[df].iloc[0::24])
-        _2h_(df=df+1)
-    else:
-        print('generated 2 hour')
 
 _4h=[]        
 def _4h_(df=0):
-    if df < len(klines):
+    for df in range(len(klines)):
         _4h.append(klines[df].iloc[0::48])
-        _4h_(df=df+1)
-    else:
-        print('generated 4 hour')
 
 _6h=[]        
 def _6h_(df=0):
-    if df < len(klines):
+    for df in range(len(klines)):
         _6h.append(klines[df].iloc[0::72])
-        _6h_(df=df+1)
-    else:
-        print('generated 6 hour')
 
 _12h=[] #144 steps
 def _12h_(df=0):
-    if df < len(klines):
+    for df in range(len(klines)):
         _12h.append(klines[df].iloc[0::144])
-        _12h_(df=df+1)
-    else:
-        print('generated 12 hour')
 
 
 
