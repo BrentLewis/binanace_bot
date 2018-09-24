@@ -136,8 +136,21 @@ def change_klines_to_np(a=0):
         for i in range(len(klines[a])):
             klines[a][i] = klines[a][i].values
             klines[a][i] = klines[a][i].astype(np.float64)
+        change_klines_to_np(a=a+1) 
     else:
 #float 64 because that's what tulipy uses. Going to eventually make it so the times and volume stay int
         return print('klines is numpy')
 
-change_klines_to_np()
+change_klines_to_np(a=0)
+
+_5m= klines[0]
+_10m=klines[1]
+_15m=klines[2]
+_30m=klines[3]
+_1h=klines[4]
+_2h=klines[5]
+_4h=klines[5]
+_6h=klines[6]
+_12h=klines[7]
+del klines
+
