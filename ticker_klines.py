@@ -102,7 +102,7 @@ def get_time_frames():
         _4h.append(klines[df].iloc[0::48])
         _6h.append(klines[df].iloc[0::72])
         _12h.append(klines[df].iloc[0::144])
-    return [_5m,_10m, _15m, _30m, _1h, _2h, _4h, _6h, _12]
+    return [_5m,_10m, _15m, _30m, _1h, _2h, _4h, _6h, _12h]
 
 
 klines = get_time_frames()
