@@ -7,20 +7,26 @@ client = Client('api_key', 'secret_key')
 api_key = ''
 secret_key = ''
 
-def tickers():
+#This pulls out all the symbols(a.k.a tickers) from the market
+def tickers(volume=0):
     tickers = pd.DataFrame(client.get_ticker())
     # isolates the symbol and volume
     tickers = tickers.loc[:, ['symbol', 'volume']]
     # floats volume
     tickers['volume'] = tickers.loc[:, ['volume']].astype(float)
-    tickers = tickers.loc[tickers['volume'] >= 150000, 'symbol']
+    #checks through, and only returns the tickers with a higher amount of volume than listed
+    tickers = tickers.loc[tickers['volume'] >= volume, 'symbol']
     return tickers
 
-tickers = tickers()
+tickers = tickers(volume=150000)
 
+#This pulls out all the market data for the isolated tickers
 def test_iterdf(tickers):
     try:
         print('Running 1m')
+        #we are only using the 5 min kline window here, because you can access the necessary data --
+        #for all other klines with indexing. 
+        #!!!except for volume. volume must be summed for that duration of each time frame
         _5m = [pd.DataFrame(client.get_historical_klines(i, client.KLINE_INTERVAL_1HOUR, "10 September, 2018")) for i in tickers]
 
     except BinanceAPIException as e:
@@ -32,6 +38,8 @@ def test_iterdf(tickers):
 klines = test_iterdf(tickers)
 k_len = len(klines)
 
+
+#Creating a np bool list to compare tickers to null data 
 def tick_check():
     mask = np.ones(len(klines), dtype=bool)
 
@@ -41,6 +49,8 @@ def tick_check():
     return mask
 mask = tick_check()
 
+
+#deleting all data frames that are empty
 def clean_data():    
 
     print('running clean_data')
@@ -57,16 +67,22 @@ def clean_data():
             clean_data()
     symbol = []
     for i in range(len(tickers)):
+        #compares tickers to np mask
+        #appends the ticker to the symbol list if the data frame had data
         if mask[i] == True:
             symbol.append(tickers.iloc[i])
 
     return symbol
 
-
 clean_data()
+#this runs clean_data one more time to make sure it cleaned everything
+#it also returns symbol as ticker just to keep continuity 
 tickers = clean_data()
 
 
+#Slicing to the different time frames. 
+#all the time frame functions to be broken down into one function, and fill a single list to push into change_klines_to_np()
+#volume needs to be summed for each frame
 _10m=[]        
 def _10m_(df=0):
     if df < len(klines):
@@ -156,13 +172,14 @@ def _12h_(df=0):
 #_12h=  #720 step
 
 
-
-def change_klines_to_np():
-    for i in range(len(klines)):
-        klines[i] = klines[i].values
-        klines[i] = klines[i].astype(np.float64)
-
-    return print('klines is numpy')
+#changes all the data Frames to np array
+def change_klines_to_np(a=0):
+    if a < len(klines):
+        for i in range(len(klineschange_klines_to_np[a])):
+            klines[a][i] = klines[a][i].values
+            klines[a][i] = klines[a][i].astype(np.float64)
+    else:
+#float 64 because that's what tulipy uses. Going to eventually make it so the times and volume stay int
+        return print('klines is numpy')
 
 change_klines_to_np()
-
