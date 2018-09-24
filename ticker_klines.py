@@ -84,44 +84,25 @@ tickers = clean_data()
 #all the time frame functions to be broken down into one function, and fill a single list to push into change_klines_to_np()
 #volume needs to be summed for each frame
 _10m=[]        
-def _10m_(df=0):
+_15m=[]        
+_30m=[]        
+_1h=[]        
+_2h=[]        
+_4h=[]        
+_6h=[]        
+_12h=[] #144 steps
+
+def get_time_frames():
     for df in range(len(klines)):
         _10m.append(klines[df].iloc[0::2])
-
-_15m=[]        
-def _15m_(df=0):
-    for df in range(len(klines)):
         _15m.append(klines[df].iloc[0::3])
-
-_30m=[]        
-def _30m_(df=0):
-    for df in range(len(klines)):
         _30m.append(klines[df].iloc[0::6])
-
-_1h=[]        
-def _1h_(df=0):
-    for df in range(len(klines)):
         _1h.append(klines[df].iloc[0::12])
-_2h=[]        
-def _2h_(df=0):
-    for df in range(len(klines)):
         _2h.append(klines[df].iloc[0::24])
-
-_4h=[]        
-def _4h_(df=0):
-    for df in range(len(klines)):
         _4h.append(klines[df].iloc[0::48])
-
-_6h=[]        
-def _6h_(df=0):
-    for df in range(len(klines)):
         _6h.append(klines[df].iloc[0::72])
-
-_12h=[] #144 steps
-def _12h_(df=0):
-    for df in range(len(klines)):
         _12h.append(klines[df].iloc[0::144])
-
+    return print('time frames created')
 
 
 #klines for 5 min window      
