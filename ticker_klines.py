@@ -83,16 +83,16 @@ tickers = clean_data()
 #Slicing to the different time frames. 
 #all the time frame functions to be broken down into one function, and fill a single list to push into change_klines_to_np()
 #volume needs to be summed for each frame
-_10m=[]        
-_15m=[]        
-_30m=[]        
-_1h=[]        
-_2h=[]        
-_4h=[]        
-_6h=[]        
-_12h=[] #144 steps
-
 def get_time_frames():
+    _5m=klines
+    _10m=[]        
+    _15m=[]        
+    _30m=[]        
+    _1h=[]        
+    _2h=[]        
+    _4h=[]        
+    _6h=[]        
+    _12h=[] #144 steps
     for df in range(len(klines)):
         _10m.append(klines[df].iloc[0::2])
         _15m.append(klines[df].iloc[0::3])
@@ -102,8 +102,9 @@ def get_time_frames():
         _4h.append(klines[df].iloc[0::48])
         _6h.append(klines[df].iloc[0::72])
         _12h.append(klines[df].iloc[0::144])
-    return print('time frames created')
-
+    return klines = [_5m,_10m, _15m, _30m, _1h,
+                            _2h, _4h, _6h, _12]
+get_time_frames()
 
 #klines for 5 min window      
 #5m = klines
@@ -132,7 +133,7 @@ def get_time_frames():
 #changes all the data Frames to np array
 def change_klines_to_np(a=0):
     if a < len(klines):
-        for i in range(len(klineschange_klines_to_np[a])):
+        for i in range(len(klines[a])):
             klines[a][i] = klines[a][i].values
             klines[a][i] = klines[a][i].astype(np.float64)
     else:
