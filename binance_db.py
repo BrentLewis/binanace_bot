@@ -100,7 +100,7 @@ class i_5m(db.Model):
     symbols = db.relationship('symbol')
 
     def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
                SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
         
         self._5m_RSI = _1h_RSI
@@ -145,7 +145,7 @@ class i_10m(db.Model):
     symbols = db.relationship('symbol')
 
     def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
                SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
         
         self._10m_RSI = _1h_RSI
@@ -187,7 +187,7 @@ class i_15m(db.Model):
     symbols = db.relationship('symbol')
 
     def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
                SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
         
         self._15m_RSI = _1h_RSI
@@ -230,7 +230,7 @@ class i_30m(db.Model):
     symbols = db.relationship('symbol')
 
     def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
                SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
         
         self._30m_RSI = _1h_RSI
@@ -275,7 +275,7 @@ class i_1h(db.Model):
     symbols = db.relationship('symbol')
 
     def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
                SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
         
         self._1h_RSI = _1h_RSI
@@ -319,7 +319,7 @@ class i_2h(db.Model):
     symbols = db.relationship('symbol')
 
     def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
                SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
         
         self._2h_RSI = _1h_RSI
@@ -362,7 +362,7 @@ class i_4h(db.Model):
     symbols = db.relationship('symbol')
 
     def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
                SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
         
         self._4h_RSI = _1h_RSI
@@ -405,7 +405,7 @@ class i_6h(db.Model):
     symbols = db.relationship('symbol')
 
     def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
                SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
         
         self._6h_RSI = _1h_RSI
@@ -448,7 +448,7 @@ class i_12h(db.Model):
     symbols = db.relationship('symbol')
 
     def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM STOCHRSI, 
+               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
                SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
         
         self._12h_RSI = _1h_RSI
