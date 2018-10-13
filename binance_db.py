@@ -1,15 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy as sa
-from flask import Flask as fl
-from sqlalchemy import exc
-import pymysql
-
-pymysql.install_as_MySQLdb()
-
-app = fl(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password0@localhost/mydb'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-DEBUG = True
-db = sa(app)
 
 
 class symbol(db.Model):
@@ -20,6 +8,15 @@ class symbol(db.Model):
     _time = db.relationship('time', backref='Symbol', lazy=True)
     _open_close = db.relationship('open_close', backref='Symbol', lazy=True)
     _h_l_v = db.relationship('h_l_v', backref='Symbol', lazy=True)
+    _i_5m = db.relationship('i_5m', backref='Symbol', lazy=True)
+    _i_10m = db.relationship('i_10m', backref='Symbol', lazy=True)
+    _i_15m = db.relationship('i_15m', backref='Symbol', lazy=True)
+    _i_30m = db.relationship('i_30m', backref='Symbol', lazy=True)
+    _i_1h = db.relationship('i_1h', backref='Symbol', lazy=True)
+    _i_2h = db.relationship('i_2h', backref='Symbol', lazy=True)
+    _i_4h = db.relationship('i_4h', backref='Symbol', lazy=True)
+    _i_6h = db.relationship('i_6h', backref='Symbol', lazy=True)
+    _i_12h = db.relationship('i_12h', backref='Symbol', lazy=True)
 
 
     def __init__(self, symbol_col):
@@ -77,13 +74,14 @@ class open_close(db.Model):
     def __repr__(self):
         return '<open_close %r>' % self.id
 #Between this comment line and the next all the functions are the same, they just call different time frames
-#I want to come back ot here and put in *args in the __init__ and make a class generator to cut out 200-300 lines
+#I want to come back ot here and put in *kwargs in the __init__ and make a class generator to cut out 200-300 lines
 ################################################################################################################################
 class i_5m(db.Model):
-    id = db.Column('I_5m_id', db.Integer, primary_key = True)
+    id = db.Column('i_5m_id', db.Integer, primary_key = True)
     _5m_RSI = db.Column('RSI', db.VARCHAR(45))
+    _5m_MFI = db.Column('MFI', db.VARCHAR(45))
     _5m_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
-    _5m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _5m_BBANDS_MIDDLE = db.Column('BBANDS_MIDDLE', db.VARCHAR(45))
     _5m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _5m_EMA = db.Column('EMA', db.VARCHAR(45))
     _5m_MA = db.Column('MA', db.VARCHAR(45))
@@ -99,35 +97,37 @@ class i_5m(db.Model):
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
-               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+    def __int__(self, _5m_RSI, _5m_MFI, _5m_BBANDS_LOWER, _5m_BBANDS_MIDDLE, _5m_BBANDS_UPPER,
+               vEMA, _5m_MA, _5m_MACD, _5m_MACD_SIGNAL, _5m_MACD_HISTOGRAM, _5m_STOCHRSI, 
+               _5m_SAR,_5m_STOCH_K,_5m_STOCH_D, _5m_CCI): #indicators __int__
         
-        self._5m_RSI = _1h_RSI
-        self._5m_BBANDS_LOWER = _1h_BBANDS_LOWER
-        self._5m_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
-        self._5m_BBANDS_UPPER = _1h_BBANDS_UPPER
-        self._5m_EMA = _1h_EMA
-        self._5m_MA =_1h_MA
-        self._5m_MACD = _1h_MACD
-        self._5m_MACD_SIGNAL = _1h_MACD_SIGNAL
-        self._5m_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
-        self._5m_STOCHRSI = _1h_STOCHRSI
-        self._5m_SAR = _1h_SAR
-        self._5m_STOCH_K = _1h_STOCH_K
-        self._5m_STOCH_D = _1h_STOCH_D
-        self._5m_CCI = _1h_CCI
+        self._5m_RSI = _5m_RSI
+        self._5m_MFI = _5m_MFI
+        self._5m_BBANDS_LOWER = _5m_BBANDS_LOWER
+        self._5m_BBANDS_MIDDLE = _5m_BBANDS_MIDDLE
+        self._5m_BBANDS_UPPER = _5m_BBANDS_UPPER
+        self._5m_EMA = _5m_EMA
+        self._5m_MA =_5m_MA
+        self._5m_MACD = _5m_MACD
+        self._5m_MACD_SIGNAL = _5m_MACD_SIGNAL
+        self._5m_MACD_HISTOGRAM = _5m_MACD_HISTOGRAM
+        self._5m_STOCHRSI = _5m_STOCHRSI
+        self._5m_SAR = _5m_SAR
+        self._5m_STOCH_K = _5m_STOCH_K
+        self._5m_STOCH_D = _5m_STOCH_D
+        self._5m_CCI = _5m_CCI
 
        
     def __repr__(self):
-        return '<I_5m %r>' % self.id
+        return '<i_5m %r>' % self.id
 
 
 class i_10m(db.Model):
-    id = db.Column('I_10m_id', db.Integer, primary_key = True)
+    id = db.Column('i_10m_id', db.Integer, primary_key = True)
     _10m_RSI = db.Column('RSI', db.VARCHAR(45))
+    _10m_MFI = db.Column('MFI', db.VARCHAR(45))
     _10m_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
-    _10m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _10m_BBANDS_MIDDLE = db.Column('BBANDS_MIDDLE', db.VARCHAR(45))
     _10m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _10m_EMA = db.Column('EMA', db.VARCHAR(45))
     _10m_MA = db.Column('MA', db.VARCHAR(45))
@@ -144,33 +144,35 @@ class i_10m(db.Model):
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
-               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+    def __int__(self, _10m_RSI, _10m_MFI, _10m_BBANDS_LOWER, _10m_BBANDS_MIDDLE, _10m_BBANDS_UPPER,
+               _10m_EMA, _10m_MA, _10m_MACD, _10m_MACD_SIGNAL, _10m_MACD_HISTOGRAM, _10m_STOCHRSI, 
+               _10m_SAR,_10m_STOCH_K,_10m_STOCH_D, _10m_CCI): #indicators __int__
         
-        self._10m_RSI = _1h_RSI
-        self._10m_BBANDS_LOWER = _1h_BBANDS_LOWER
-        self._10m_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
-        self._10m_BBANDS_UPPER = _1h_BBANDS_UPPER
-        self._10m_EMA = _1h_EMA
-        self._10m_MA =_1h_MA
-        self._10m_MACD = _1h_MACD
-        self._10m_MACD_SIGNAL = _1h_MACD_SIGNAL
-        self._10m_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
-        self._10m_STOCHRSI = _1h_STOCHRSI
-        self._10m_SAR = _1h_SAR
-        self._10m_STOCH_K = _1h_STOCH_K
-        self._10m_STOCH_D = _1h_STOCH_D
-        self._10m_CCI = _1h_CCI
+        self._10m_RSI = _10m_RSI
+        self._10m_MFI = _10m_MFI
+        self._10m_BBANDS_LOWER = _10m_BBANDS_LOWER
+        self._10m_BBANDS_MIDDLE = _10m_BBANDS_MIDDLE
+        self._10m_BBANDS_UPPER = _10m_BBANDS_UPPER
+        self._10m_EMA = _10m_EMA
+        self._10m_MA =_10m_MA
+        self._10m_MACD = _10m_MACD
+        self._10m_MACD_SIGNAL = _10m_MACD_SIGNAL
+        self._10m_MACD_HISTOGRAM = _10m_MACD_HISTOGRAM
+        self._10m_STOCHRSI = _10m_STOCHRSI
+        self._10m_SAR = _10m_SAR
+        self._10m_STOCH_K = _10m_STOCH_K
+        self._10m_STOCH_D = _10m_STOCH_D
+        self._10m_CCI = _10m_CCI
 
     def __repr__(self):
-        return '<I_10m %r>' % self.id
+        return '<i_10m %r>' % self.id
 
 class i_15m(db.Model):
-    id = db.Column('I_15m_id', db.Integer, primary_key = True)
+    id = db.Column('i_15m_id', db.Integer, primary_key = True)
     _15m_RSI = db.Column('RSI', db.VARCHAR(45))
+    _15m_MFI = db.Column('MFI', db.VARCHAR(45))
     _15m_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
-    _15m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _15m_BBANDS_MIDDLE = db.Column('BBANDS_MIDDLE', db.VARCHAR(45))
     _15m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _15m_EMA = db.Column('EMA', db.VARCHAR(45))
     _15m_MA = db.Column('MA', db.VARCHAR(45))
@@ -186,33 +188,35 @@ class i_15m(db.Model):
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
-               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+    def __int__(self, _15m_RSI, _15m_MFI, _15m_BBANDS_LOWER, _15m_BBANDS_MIDDLE, _15m_BBANDS_UPPER,
+               _15m_EMA, _15m_MA, _15m_MACD, _15m_MACD_SIGNAL, _15m_MACD_HISTOGRAM, _15m_STOCHRSI, 
+               _15m_SAR,_15m_STOCH_K,_15m_STOCH_D, _15m_CCI): #indicators __int__
         
-        self._15m_RSI = _1h_RSI
-        self._15m_BBANDS_LOWER = _1h_BBANDS_LOWER
-        self._15m_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
-        self._15m_BBANDS_UPPER = _1h_BBANDS_UPPER
-        self._15m_EMA = _1h_EMA
-        self._15m_MA =_1h_MA
-        self._15m_MACD = _1h_MACD
-        self._15m_MACD_SIGNAL = _1h_MACD_SIGNAL
-        self._15m_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
-        self._15m_STOCHRSI = _1h_STOCHRSI
-        self._15m_SAR = _1h_SAR
-        self._15m_STOCH_K = _1h_STOCH_K
-        self._15m_STOCH_D = _1h_STOCH_D
-        self._15m_CCI = _1h_CCI
+        self._15m_RSI = _15m_RSI
+        self._15m_MFI = _15m_MFI
+        self._15m_BBANDS_LOWER = _15m_BBANDS_LOWER
+        self._15m_BBANDS_MIDDLE = _15m_BBANDS_MIDDLE
+        self._15m_BBANDS_UPPER = _15m_BBANDS_UPPER
+        self._15m_EMA = _15m_EMA
+        self._15m_MA =_15m_MA
+        self._15m_MACD = _15m_MACD
+        self._15m_MACD_SIGNAL = _15m_MACD_SIGNAL
+        self._15m_MACD_HISTOGRAM = _15m_MACD_HISTOGRAM
+        self._15m_STOCHRSI = _15m_STOCHRSI
+        self._15m_SAR = _15m_SAR
+        self._15m_STOCH_K = _15m_STOCH_K
+        self._15m_STOCH_D = _15m_STOCH_D
+        self._15m_CCI = _15m_CCI
 
     def __repr__(self):
-        return '<I_15m %r>' % self.id
+        return '<i_15m %r>' % self.id
 
 class i_30m(db.Model):
-    id = db.Column('I_30m_id', db.Integer, primary_key = True)
+    id = db.Column('i_30m_id', db.Integer, primary_key = True)
     _30m_RSI = db.Column('RSI', db.VARCHAR(45))
+    _30m_MFI = db.Column('MFI', db.VARCHAR(45))
     _30m_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
-    _30m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _30m_BBANDS_MIDDLE = db.Column('BBANDS_MIDDLE', db.VARCHAR(45))
     _30m_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _30m_EMA = db.Column('EMA', db.VARCHAR(45))
     _30m_MA = db.Column('MA', db.VARCHAR(45))
@@ -229,35 +233,37 @@ class i_30m(db.Model):
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
-               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+    def __int__(self, _30m_RSI, _30m_MFI, _30m_BBANDS_LOWER, _30m_BBANDS_MIDDLE, _30m_BBANDS_UPPER,
+               _30m_EMA, _30m_MA, _30m_MACD, _30m_MACD_SIGNAL, _30m_MACD_HISTOGRAM, _30m_STOCHRSI, 
+               _30m_SAR,_30m_STOCH_K,_30m_STOCH_D, _30m_CCI): #indicators __int__
         
-        self._30m_RSI = _1h_RSI
-        self._30m_BBANDS_LOWER = _1h_BBANDS_LOWER
-        self._30m_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
-        self._30m_BBANDS_UPPER = _1h_BBANDS_UPPER
-        self._30m_EMA = _1h_EMA
-        self._30m_MA =_1h_MA
-        self._30m_MACD = _1h_MACD
-        self._30m_MACD_SIGNAL = _1h_MACD_SIGNAL
-        self._30m_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
-        self._30m_STOCHRSI = _1h_STOCHRSI
-        self._30m_SAR = _1h_SAR
-        self._30m_STOCH_K = _1h_STOCH_K
-        self._30m_STOCH_D = _1h_STOCH_D
-        self._30m_CCI = _1h_CCI
+        self._30m_RSI = _30m_RSI
+        self._30m_MFI = _30m_MFI
+        self._30m_BBANDS_LOWER = _30m_BBANDS_LOWER
+        self._30m_BBANDS_MIDDLE = _30m_BBANDS_MIDDLE
+        self._30m_BBANDS_UPPER = _30m_BBANDS_UPPER
+        self._30m_EMA = _30m_EMA
+        self._30m_MA =_30m_MA
+        self._30m_MACD = _30m_MACD
+        self._30m_MACD_SIGNAL = _30m_MACD_SIGNAL
+        self._30m_MACD_HISTOGRAM = _30m_MACD_HISTOGRAM
+        self._30m_STOCHRSI = _30m_STOCHRSI
+        self._30m_SAR = _30m_SAR
+        self._30m_STOCH_K = _30m_STOCH_K
+        self._30m_STOCH_D = _30m_STOCH_D
+        self._30m_CCI = _30m_CCI
 
 
     def __repr__(self):
         return '<I_30m %r>' % self.id
 
 class i_1h(db.Model):
-    id = db.Column('I_1h_id', db.Integer, primary_key = True)
-    id = db.Column('I_1h_id', db.Integer, primary_key = True)
+    id = db.Column('i_1h_id', db.Integer, primary_key = True)
+    id = db.Column('i_1h_id', db.Integer, primary_key = True)
     _1h_RSI = db.Column('RSI', db.VARCHAR(45))
+    _1h_MFI = db.Column('MFI', db.VARCHAR(45))
     _1h_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
-    _1h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _1h_BBANDS_MIDDLE = db.Column('BBANDS_MIDDLE', db.VARCHAR(45))
     _1h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _1h_EMA = db.Column('EMA', db.VARCHAR(45))
     _1h_MA = db.Column('MA', db.VARCHAR(45))
@@ -274,11 +280,12 @@ class i_1h(db.Model):
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
-               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+    def __int__(self, _1h_RSI, _1h_MFI, _1h_BBANDS_LOWER, _1h_BBANDS_MIDDLE, _1h_BBANDS_UPPER,
+               _1h_EMA, _1h_MA, _1h_MACD, _1h_MACD_SIGNAL, _1h_MACD_HISTOGRAM, _1h_STOCHRSI, 
+               _1h_SAR,_1h_STOCH_K,_1h_STOCH_D, _1h_CCI): #indicators __int__
         
         self._1h_RSI = _1h_RSI
+        self._1h_MFI = _1h_MFI
         self._1h_BBANDS_LOWER = _1h_BBANDS_LOWER
         self._1h_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
         self._1h_BBANDS_UPPER = _1h_BBANDS_UPPER
@@ -298,11 +305,12 @@ class i_1h(db.Model):
         return '<I_1h %r>' % self.id
 
 class i_2h(db.Model):
-    id = db.Column('I_2h_id', db.Integer, primary_key = True)
-    id = db.Column('I_1h_id', db.Integer, primary_key = True)
+    id = db.Column('i_2h_id', db.Integer, primary_key = True)
+    id = db.Column('i_1h_id', db.Integer, primary_key = True)
     _2h_RSI = db.Column('RSI', db.VARCHAR(45))
+    _2h_MFI = db.Column('MFI', db.VARCHAR(45))
     _2h_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
-    _2h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _2h_BBANDS_MIDDLE = db.Column('BBANDS_MIDDLE', db.VARCHAR(45))
     _2h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _2h_EMA = db.Column('EMA', db.VARCHAR(45))
     _2h_MA = db.Column('MA', db.VARCHAR(45))
@@ -318,34 +326,36 @@ class i_2h(db.Model):
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
-               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+    def __int__(self, _2h_RSI, _2h_MFI, _2h_BBANDS_LOWER, _2h_BBANDS_MIDDLE, _2h_BBANDS_UPPER,
+               _2h_EMA, _2h_MA, _2h_MACD, _2h_MACD_SIGNAL, _2h_MACD_HISTOGRAM, _2h_STOCHRSI, 
+               _2h_SAR,_2h_STOCH_K,_2h_STOCH_D, _2h_CCI): #indicators __int__
         
-        self._2h_RSI = _1h_RSI
-        self._2h_BBANDS_LOWER = _1h_BBANDS_LOWER
-        self._2h_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
-        self._2h_BBANDS_UPPER = _1h_BBANDS_UPPER
-        self._2h_EMA = _1h_EMA
-        self._2h_MA =_1h_MA
-        self._2h_MACD = _1h_MACD
-        self._2h_MACD_SIGNAL = _1h_MACD_SIGNAL
-        self._2h_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
-        self._2h_STOCHRSI = _1h_STOCHRSI
-        self._2h_SAR = _1h_SAR
-        self._2h_STOCH_K = _1h_STOCH_K
-        self._2h_STOCH_D = _1h_STOCH_D
-        self._2h_CCI = _1h_CCI
+        self._2h_RSI = _2h_RSI
+        self._2h_MFI = _2h_MFI
+        self._2h_BBANDS_LOWER = _2h_BBANDS_LOWER
+        self._2h_BBANDS_MIDDLE = _2h_BBANDS_MIDDLE
+        self._2h_BBANDS_UPPER = _2h_BBANDS_UPPER
+        self._2h_EMA = _2h_EMA
+        self._2h_MA =_2h_MA
+        self._2h_MACD = _2h_MACD
+        self._2h_MACD_SIGNAL = _2h_MACD_SIGNAL
+        self._2h_MACD_HISTOGRAM = _2h_MACD_HISTOGRAM
+        self._2h_STOCHRSI = _2h_STOCHRSI
+        self._2h_SAR = _2h_SAR
+        self._2h_STOCH_K = _2h_STOCH_K
+        self._2h_STOCH_D = _2h_STOCH_D
+        self._2h_CCI = _2h_CCI
 
        
     def __repr__(self):
-        return '<I_2h %r>' % self.id
+        return '<i_2h %r>' % self.id
 
 class i_4h(db.Model):
-    id = db.Column('I_4h_id', db.Integer, primary_key = True)
+    id = db.Column('i_4h_id', db.Integer, primary_key = True)
     _4h_RSI = db.Column('RSI', db.VARCHAR(45))
+    _4h_MFI = db.Column('MFI', db.VARCHAR(45))
     _4h_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
-    _4h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _4h_BBANDS_MIDDLE = db.Column('BBANDS_MIDDLE', db.VARCHAR(45))
     _4h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _4h_EMA = db.Column('EMA', db.VARCHAR(45))
     _4h_MA = db.Column('MA', db.VARCHAR(45))
@@ -361,34 +371,36 @@ class i_4h(db.Model):
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
-               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+    def __int__(self, _4h_RSI, _4h_MFI, _4h_BBANDS_LOWER, _4h_BBANDS_MIDDLE, _4h_BBANDS_UPPER,
+               _4h_EMA, _4h_MA, _4h_MACD, _4h_MACD_SIGNAL, _4h_MACD_HISTOGRAM, _4h_STOCHRSI, 
+               _4h_SAR,_4h_STOCH_K,_4h_STOCH_D, _4h_CCI): #indicators __int__
         
-        self._4h_RSI = _1h_RSI
-        self._4h_BBANDS_LOWER = _1h_BBANDS_LOWER
-        self._4h_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
-        self._4h_BBANDS_UPPER = _1h_BBANDS_UPPER
-        self._4h_EMA = _1h_EMA
-        self._4h_MA =_1h_MA
-        self._4h_MACD = _1h_MACD
-        self._4h_MACD_SIGNAL = _1h_MACD_SIGNAL
-        self._4h_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
-        self._4h_STOCHRSI = _1h_STOCHRSI
-        self._4h_SAR = _1h_SAR
-        self._4h_STOCH_K = _1h_STOCH_K
-        self._4h_STOCH_D = _1h_STOCH_D
-        self._4h_CCI = _1h_CCI
+        self._4h_RSI = _4h_RSI
+        self._4h_MFI = _4h_MFI
+        self._4h_BBANDS_LOWER = _4h_BBANDS_LOWER
+        self._4h_BBANDS_MIDDLE = _4h_BBANDS_MIDDLE
+        self._4h_BBANDS_UPPER = _4h_BBANDS_UPPER
+        self._4h_EMA = _4h_EMA
+        self._4h_MA =_4h_MA
+        self._4h_MACD = _4h_MACD
+        self._4h_MACD_SIGNAL = _4h_MACD_SIGNAL
+        self._4h_MACD_HISTOGRAM = _4h_MACD_HISTOGRAM
+        self._4h_STOCHRSI = _4h_STOCHRSI
+        self._4h_SAR = _4h_SAR
+        self._4h_STOCH_K = _4h_STOCH_K
+        self._4h_STOCH_D = _4h_STOCH_D
+        self._4h_CCI = _4h_CCI
 
        
     def __repr__(self):
-        return '<I_4h %r>' % self.id
+        return '<i_4h %r>' % self.id
 
 class i_6h(db.Model):
-    id = db.Column('I_6h_id', db.Integer, primary_key = True)
+    id = db.Column('i_6h_id', db.Integer, primary_key = True)
     _6h_RSI = db.Column('RSI', db.VARCHAR(45))
+    _6h_MFI = db.Column('MFI', db.VARCHAR(45))
     _6h_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
-    _6h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _6h_BBANDS_MIDDLE = db.Column('BBANDS_MIDDLE', db.VARCHAR(45))
     _6h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _6h_EMA = db.Column('EMA', db.VARCHAR(45))
     _6h_MA = db.Column('MA', db.VARCHAR(45))
@@ -404,34 +416,36 @@ class i_6h(db.Model):
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
-               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+    def __int__(self, _6h_RSI, _6h_MFI, _6h_BBANDS_LOWER, _6h_BBANDS_MIDDLE, _6h_BBANDS_UPPER,
+               _6h_EMA, _6h_MA, _6h_MACD, _6h_MACD_SIGNAL, _6h_MACD_HISTOGRAM, _6h_STOCHRSI, 
+               _6h_SAR,_6h_STOCH_K,_6h_STOCH_D, _6h_CCI): #indicators __int__
         
-        self._6h_RSI = _1h_RSI
-        self._6h_BBANDS_LOWER = _1h_BBANDS_LOWER
-        self._6h_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
-        self._6h_BBANDS_UPPER = _1h_BBANDS_UPPER
-        self._6h_EMA = _1h_EMA
-        self._6h_MA =_1h_MA
-        self._6h_MACD = _1h_MACD
-        self._6h_MACD_SIGNAL = _1h_MACD_SIGNAL
-        self._6h_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
-        self._6h_STOCHRSI = _1h_STOCHRSI
-        self._6h_SAR = _1h_SAR
-        self._6h_STOCH_K = _1h_STOCH_K
-        self._6h_STOCH_D = _1h_STOCH_D
-        self._6h_CCI = _1h_CCI
+        self._6h_RSI = _6h_RSI
+        self._6h_MFI = _6h_MFI
+        self._6h_BBANDS_LOWER = _6h_BBANDS_LOWER
+        self._6h_BBANDS_MIDDLE = _6h_BBANDS_MIDDLE
+        self._6h_BBANDS_UPPER = _6h_BBANDS_UPPER
+        self._6h_EMA = _6h_EMA
+        self._6h_MA =_6h_MA
+        self._6h_MACD = _6h_MACD
+        self._6h_MACD_SIGNAL = _6h_MACD_SIGNAL
+        self._6h_MACD_HISTOGRAM = _6h_MACD_HISTOGRAM
+        self._6h_STOCHRSI = _6h_STOCHRSI
+        self._6h_SAR = _6h_SAR
+        self._6h_STOCH_K = _6h_STOCH_K
+        self._6h_STOCH_D = _6h_STOCH_D
+        self._6h_CCI = _6h_CCI
 
        
     def __repr__(self):
-        return '<I_6h %r>' % self.id
+        return '<i_6h %r>' % self.id
 
 class i_12h(db.Model):
-    id = db.Column('I_12h_id', db.Integer, primary_key = True)
+    id = db.Column('i_12h_id', db.Integer, primary_key = True)
     _12h_RSI = db.Column('RSI', db.VARCHAR(45))
+    _12h_MFI = db.Column('MFI', db.VARCHAR(45))
     _12h_BBANDS_LOWER = db.Column('BBANDS_LOWER', db.VARCHAR(45))
-    _12h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
+    _12h_BBANDS_MIDDLE = db.Column('BBANDS_MIDDLE', db.VARCHAR(45))
     _12h_BBANDS_UPPER = db.Column('BBANDS_UPPER', db.VARCHAR(45))
     _12h_EMA = db.Column('EMA', db.VARCHAR(45))
     _12h_MA = db.Column('MA', db.VARCHAR(45))
@@ -447,28 +461,29 @@ class i_12h(db.Model):
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.symbol_id'))
     symbols = db.relationship('symbol')
 
-    def __int__(self, RSI, BBANDS_LOWER, BBANDS_MIDDLE, BBANDS_UPPER,
-               EMA, MA, MACD, MACD_SIGNAL, MACD_HISTOGRAM, STOCHRSI, 
-               SAR,STOCH_K,STOCH_D, CCI): #indicators __int__
+    def __int__(self, _12h_RSI, _12h_MFI, _12h_BBANDS_LOWER, _12h_BBANDS_MIDDLE, _12h_BBANDS_UPPER,
+               _12h_EMA, _12h_MA, _12h_MACD, _12h_MACD_SIGNAL, _12h_MACD_HISTOGRAM, _12h_STOCHRSI, 
+               _12h_SAR,_12h_STOCH_K,_12h_STOCH_D, _12h_CCI): #indicators __int__
         
-        self._12h_RSI = _1h_RSI
-        self._12h_BBANDS_LOWER = _1h_BBANDS_LOWER
-        self._12h_BBANDS_MIDDLE = _1h_BBANDS_MIDDLE
-        self._12h_BBANDS_UPPER = _1h_BBANDS_UPPER
-        self._12h_EMA = _1h_EMA
-        self._12h_MA =_1h_MA
-        self._12h_MACD = _1h_MACD
-        self._12h_MACD_SIGNAL = _1h_MACD_SIGNAL
-        self._12h_MACD_HISTOGRAM = _1h_MACD_HISTOGRAM
-        self._12h_STOCHRSI = _1h_STOCHRSI
-        self._12h_SAR = _1h_SAR
-        self._12h_STOCH_K = _1h_STOCH_K
-        self._12h_STOCH_D = _1h_STOCH_D
-        self._12h_CCI = _1h_CCI
+        self._12h_RSI = _12h_RSI
+        self._1h_MFI = _12h_MFI
+        self._12h_BBANDS_LOWER = _12h_BBANDS_LOWER
+        self._12h_BBANDS_MIDDLE = _12h_BBANDS_MIDDLE
+        self._12h_BBANDS_UPPER = _12h_BBANDS_UPPER
+        self._12h_EMA = _12h_EMA
+        self._12h_MA =_12h_MA
+        self._12h_MACD = _12h_MACD
+        self._12h_MACD_SIGNAL = _12h_MACD_SIGNAL
+        self._12h_MACD_HISTOGRAM = _12h_MACD_HISTOGRAM
+        self._12h_STOCHRSI = _12h_STOCHRSI
+        self._12h_SAR = _12h_SAR
+        self._12h_STOCH_K = _12h_STOCH_K
+        self._12h_STOCH_D = _12h_STOCH_D
+        self._12h_CCI = _12h_CCI
 
        
     def __repr__(self):
-        return '<I_12h %r>' % self.id
+        return '<i_12h %r>' % self.id
 #####################################################################################################################################    
 
 def _symbol():
@@ -485,15 +500,16 @@ _symbol()
 
 def t_loop(a=0):
     for i in range(len(klines[a])):
-        try:
-            s = symbol(symbol_col=tickers[a])
-            t = time(open_time=klines[a][i][0], close_time=klines[a][i][6])
-            s._time.append(t)
-            db.session.add(s)
-            db.session.add(t)
+        with db.session.no_autoflush:
+            try:
+                s = symbol(symbol_col=tickers[a])
+                t = time(open_time=klines[a][i][0], close_time=klines[a][i][6])
+                s._time.append(t)
+                db.session.add(s)
+                db.session.add(t)
 
-        except exc.IntegrityError as e:
-            db.session.rollback()
+            except exc.IntegrityError as e:
+                db.session.rollback()
     
     a = a + 1
     if a < len(klines):
@@ -544,245 +560,238 @@ h_l_v_loop(a = 0)
 ###These are all a repeat of the same finction as well.
 #I'll build a decorator, or class not sure which is best yet, later for now it functions
 #These are all meant to be called inside the indicators() function
-def _5m_():
-
+#these are all meant to be called inside the indicators() function
+def _5m_(Indicators,_symbol_):
     for a in range(len(Indicators['rsi'])):
         with db.session.no_autoflush:
-            s = symbol(symbol_col=tickers[symbol])
-            
-            _5m = _5m(stoch_k = Indicators['stoch_k'][a],
-                stoch_d= Indicators['stoch_d'][a],
-                stochrsi= Indicators['stochrsi'][a],
-                rsi=Indicators['rsi'][a],
-                cci= Indicators['cci'][a],
-                ema= Indicators['ema'][a],
-                mfi= Indicators['mfi'][a],
-                psar= Indicators['psar'][a],
-                bbands_upper= Indicators['bbands_upper'][a],
-                bbands_middle= Indicators['bbands_middle'][a],
-                bbands_lower= Indicators['bbands_lower'][a],
-                macd= Indicators['macd'][a],
-                macd_histogram= Indicators['macd_histogram'][a],
-                macd_signal= Indicators['macd_signal'][a])
+            s = symbol(symbol_col=tickers[_symbol_])
 
-            s._5m.append(_5m)
+            _5minute = i_5m(_5m_STOCH_K=Indicators['stoch_k'][a],
+                      _5m_STOCH_D=Indicators['stoch_d'][a],
+                     _5m_STOCHRSI=Indicators['stochrsi'][a],
+                      _5m_RSI=Indicators['rsi'][a],
+                      _5m_CCI=Indicators['cci'][a],
+                     _5m_EMA=Indicators['ema'][a],
+                     _5m_MFI=Indicators['mfi'][a],
+                     _5m_SAR=Indicators['sar'][a],
+                     _5m_BBANDS_UPPER=Indicators['bbands_upper'][a],
+                     _5m_BBANDS_MIDDLE=Indicators['bbands_middle'][a],
+                     _5m_BBANDS_LOWER=Indicators['bbands_lower'][a],
+                     _5m_MACD=Indicators['macd'][a],
+                     _5m_MACD_HISTOGRAM=Indicators['macd_histogram'][a],
+                     _5m_MACD_SIGNAL=Indicators['macd_signal'][a])
+
+            s._i_5m.append(_5minute)
             db.session.add(s)
-            db.session.add(_5m)
+            db.session.add(_5minute)
     return print('5m table inserted into')
 
 
-def _10m_():
-
+def _10m_(Indicators,_symbol_):
     for a in range(len(Indicators['rsi'])):
         with db.session.no_autoflush:
-            s = symbol(symbol_col=tickers[symbol])
-                        
-            _10m = _10m(stoch_k = Indicators['stoch_k'][a],
-                stoch_d= Indicators['stoch_d'][a],
-                stochrsi= Indicators['stochrsi'][a],
-                rsi=Indicators['rsi'][a],
-                cci= Indicators['cci'][a],
-                ema= Indicators['ema'][a],
-                mfi= Indicators['mfi'][a],
-                psar= Indicators['psar'][a],
-                bbands_upper= Indicators['bbands_upper'][a],
-                bbands_middle= Indicators['bbands_middle'][a],
-                bbands_lower= Indicators['bbands_lower'][a],
-                macd= Indicators['macd'][a],
-                macd_histogram= Indicators['macd_histogram'][a],
-                macd_signal= Indicators['macd_signal'][a])
+            s = symbol(symbol_col=tickers[_symbol_])
 
-            s._10m.append(_10m)
+            _10minute = i_10m(_10m_STOCH_K=Indicators['stoch_k'][a],
+                      _10m_STOCH_D=Indicators['stoch_d'][a],
+                     _10m_STOCHRSI=Indicators['stochrsi'][a],
+                    _10m_RSI=Indicators['rsi'][a],
+                     _10m_CCI=Indicators['cci'][a],
+                     _10m_EMA=Indicators['ema'][a],
+                    _10m_MFI=Indicators['mfi'][a],
+                    _10m_SAR=Indicators['sar'][a],
+                    _10m_BBANDS_UPPER=Indicators['bbands_upper'][a],
+                    _10m_BBANDS_MIDDLE=Indicators['bbands_middle'][a],
+                     _10m_BBANDS_LOWER=Indicators['bbands_lower'][a],
+                     _10m_MACD=Indicators['macd'][a],
+                     _10m_MACD_HISTOGRAM=Indicators['macd_histogram'][a],
+                     _10m_MACD_SIGNAL=Indicators['macd_signal'][a])
+
+            s._i_10m.append(_10minute)
             db.session.add(s)
-            db.session.add(_10m)
+            db.session.add(_10minute)
     return print('10m table inserted into')
 
 
-def _15m_():
-
+def _15m_(Indicators,_symbol_):
     for a in range(len(Indicators['rsi'])):
         with db.session.no_autoflush:
-            s = symbol(symbol_col=tickers[symbol])
-                       
-            _15m = _15m(stoch_k = Indicators['stoch_k'][a],
-                stoch_d= Indicators['stoch_d'][a],
-                stochrsi= Indicators['stochrsi'][a],
-                rsi=Indicators['rsi'][a],
-                cci= Indicators['cci'][a],
-                ema= Indicators['ema'][a],
-                mfi= Indicators['mfi'][a],
-                psar= Indicators['psar'][a],
-                bbands_upper= Indicators['bbands_upper'][a],
-                bbands_middle= Indicators['bbands_middle'][a],
-                bbands_lower= Indicators['bbands_lower'][a],
-                macd= Indicators['macd'][a],
-                macd_histogram= Indicators['macd_histogram'][a],
-                macd_signal= Indicators['macd_signal'][a])
+            s = symbol(symbol_col=tickers[_symbol_])
 
-            s._15m.append(_15m)
+            _15minute = i_15m(_15m_STOCH_K=Indicators['stoch_k'][a],
+                      _15m_STOCH_D=Indicators['stoch_d'][a],
+                      _15m_STOCHRSI=Indicators['stochrsi'][a],
+                      _15m_RSI=Indicators['rsi'][a],
+                     _15m_CCI=Indicators['cci'][a],
+                     _15m_EMA=Indicators['ema'][a],
+                     _15m_MFI=Indicators['mfi'][a],
+                     _15m_SAR=Indicators['sar'][a],
+                     _15m_BBANDS_UPPER=Indicators['bbands_upper'][a],
+                     _15m_BBANDS_MIDDLE=Indicators['bbands_middle'][a],
+                     _15m_BBANDS_LOWER=Indicators['bbands_lower'][a],
+                     _15m_MACD=Indicators['macd'][a],
+                     _15m_MACD_HISTOGRAM=Indicators['macd_histogram'][a],
+                     _15m_MACD_SIGNAL=Indicators['macd_signal'][a])
+            
+
+            s._i_15m.append(_15minute)
             db.session.add(s)
-            db.session.add(_15m)
+            db.session.add(_15minute)
     return print('15m table inserted into')
 
 
-def _30m_():
-
+def _30m_(Indicators,_symbol_):
     for a in range(len(Indicators['rsi'])):
         with db.session.no_autoflush:
-            s = symbol(symbol_col=tickers[symbol])
-                         
-            _30m = _30m(stoch_k = Indicators['stoch_k'][a],
-                stoch_d= Indicators['stoch_d'][a],
-                stochrsi= Indicators['stochrsi'][a],
-                rsi=Indicators['rsi'][a],
-                cci= Indicators['cci'][a],
-                ema= Indicators['ema'][a],
-                mfi= Indicators['mfi'][a],
-                psar= Indicators['psar'][a],
-                bbands_upper= Indicators['bbands_upper'][a],
-                bbands_middle= Indicators['bbands_middle'][a],
-                bbands_lower= Indicators['bbands_lower'][a],
-                macd= Indicators['macd'][a],
-                macd_histogram= Indicators['macd_histogram'][a],
-                macd_signal= Indicators['macd_signal'][a])
+            s = symbol(symbol_col=tickers[_symbol_])
 
-            s._30m.append(_30m)
+            _30minute = i_30m(_30m_STOCH_K=Indicators['stoch_k'][a],
+                      _30m_STOCH_D=Indicators['stoch_d'][a],
+                      _30m_STOCHRSI=Indicators['stochrsi'][a],
+                      _30m_RSI=Indicators['rsi'][a],
+                     _30m_CCI=Indicators['cci'][a],
+                     _30m_EMA=Indicators['ema'][a],
+                      _30m_MFI=Indicators['mfi'][a],
+                     _30m_SAR=Indicators['sar'][a],
+                     _30m_BBANDS_UPPER=Indicators['bbands_upper'][a],
+                     _30m_BBANDS_MIDDLE=Indicators['bbands_middle'][a],
+                     _30m_BBANDS_LOWER=Indicators['bbands_lower'][a],
+                     _30m_MACD=Indicators['macd'][a],
+                     _30m_MACD_HISTOGRAM=Indicators['macd_histogram'][a],
+                     _30m_MACD_SIGNAL=Indicators['macd_signal'][a])
+
+            s._i_30m.append(_30minute)
             db.session.add(s)
-            db.session.add(_30m)
+            db.session.add(_30minute)
     return print('30m table inserted into')
-      
-def _1h_():
 
+
+def _1h_(Indicators,_symbol_):
     for a in range(len(Indicators['rsi'])):
         with db.session.no_autoflush:
-            s = symbol(symbol_col=tickers[symbol])
-                
-            _1h = _1h(stoch_k = Indicators['stoch_k'][a],
-                stoch_d= Indicators['stoch_d'][a],
-                stochrsi= Indicators['stochrsi'][a],
-                rsi=Indicators['rsi'][a],
-                cci= Indicators['cci'][a],
-                ema= Indicators['ema'][a],
-                mfi= Indicators['mfi'][a],
-                psar= Indicators['psar'][a],
-                bbands_upper= Indicators['bbands_upper'][a],
-                bbands_middle= Indicators['bbands_middle'][a],
-                bbands_lower= Indicators['bbands_lower'][a],
-                macd= Indicators['macd'][a],
-                macd_histogram= Indicators['macd_histogram'][a],
-                macd_signal= Indicators['macd_signal'][a])
+            s = symbol(symbol_col=tickers[_symbol_])
 
-            s._1h.append(_1h)
+            _1hour = i_1h(_1h_STOCH_K=Indicators['stoch_k'][a],
+                      _1h_STOCH_D=Indicators['stoch_d'][a],
+                      _1h_STOCHRSI=Indicators['stochrsi'][a],
+                      _1h_RSI=Indicators['rsi'][a],
+                      _1h_CCI=Indicators['cci'][a],
+                      _1h_EMA=Indicators['ema'][a],
+                      _1h_MFI=Indicators['mfi'][a],
+                      _1h_SAR=Indicators['sar'][a],
+                      _1h_BBANDS_UPPER=Indicators['bbands_upper'][a],
+                      _1h_BBANDS_MIDDLE=Indicators['bbands_middle'][a],
+                      _1h_BBANDS_LOWER=Indicators['bbands_lower'][a],
+                      _1h_MACD=Indicators['macd'][a],
+                      _1h_MACD_HISTOGRAM=Indicators['macd_histogram'][a],
+                      _1h_MACD_SIGNAL=Indicators['macd_signal'][a])
+
+            s._i_1h.append(_1hour)
             db.session.add(s)
-            db.session.add(_1h)
+            db.session.add(_1hour)
     return print('1h table inserted into')
 
-def _2h_():
 
+def _2h_(Indicators,_symbol_):
     for a in range(len(Indicators['rsi'])):
         with db.session.no_autoflush:
-            s = symbol(symbol_col=tickers[symbol])
-                         
-            _2h = _2h(stoch_k = Indicators['stoch_k'][a],
-                stoch_d= Indicators['stoch_d'][a],
-                stochrsi= Indicators['stochrsi'][a],
-                rsi=Indicators['rsi'][a],
-                cci= Indicators['cci'][a],
-                ema= Indicators['ema'][a],
-                mfi= Indicators['mfi'][a],
-                psar= Indicators['psar'][a],
-                bbands_upper= Indicators['bbands_upper'][a],
-                bbands_middle= Indicators['bbands_middle'][a],
-                bbands_lower= Indicators['bbands_lower'][a],
-                macd= Indicators['macd'][a],
-                macd_histogram= Indicators['macd_histogram'][a],
-                macd_signal= Indicators['macd_signal'][a])
+            s = symbol(symbol_col=tickers[_symbol_])
 
-            s._2h.append(_2h)
+            _2hour = i_2h(_2h_STOCH_K=Indicators['stoch_k'][a],
+                      _2h_STOCH_D=Indicators['stoch_d'][a],
+                      _2h_STOCHRSI=Indicators['stochrsi'][a],
+                      _2h_RSI=Indicators['rsi'][a],
+                      _2h_CCI=Indicators['cci'][a],
+                      _2h_EMA=Indicators['ema'][a],
+                      _2h_MFI=Indicators['mfi'][a],
+                      _2h_SAR=Indicators['sar'][a],
+                      _2h_BBANDS_UPPER=Indicators['bbands_upper'][a],
+                      _2h_BBANDS_MIDDLE=Indicators['bbands_middle'][a],
+                      _2h_BBANDS_LOWER=Indicators['bbands_lower'][a],
+                      _2h_MACD=Indicators['macd'][a],
+                      _2h_MACD_HISTOGRAM=Indicators['macd_histogram'][a],
+                      _2h_MACD_SIGNAL=Indicators['macd_signal'][a])
+
+            s._i_2h.append(_2hour)
             db.session.add(s)
-            db.session.add(_2h)
+            db.session.add(_2hour)
     return print('2h table inserted into')
 
-def _4h_():
 
+def _4h_(Indicators,_symbol_):
     for a in range(len(Indicators['rsi'])):
         with db.session.no_autoflush:
-            s = symbol(symbol_col=tickers[symbol])
-                  
-            _4h = _4h(stoch_k = Indicators['stoch_k'][a],
-                stoch_d= Indicators['stoch_d'][a],
-                stochrsi= Indicators['stochrsi'][a],
-                rsi=Indicators['rsi'][a],
-                cci= Indicators['cci'][a],
-                ema= Indicators['ema'][a],
-                mfi= Indicators['mfi'][a],
-                psar= Indicators['psar'][a],
-                bbands_upper= Indicators['bbands_upper'][a],
-                bbands_middle= Indicators['bbands_middle'][a],
-                bbands_lower= Indicators['bbands_lower'][a],
-                macd= Indicators['macd'][a],
-                macd_histogram= Indicators['macd_histogram'][a],
-                macd_signal= Indicators['macd_signal'][a])
+            s = symbol(symbol_col=tickers[_symbol_])
 
-            s._4h.append(_4h)
+            _4hour = i_4h(_4h_STOCH_K=Indicators['stoch_k'][a],
+                      _4h_STOCH_D=Indicators['stoch_d'][a],
+                      _4h_STOCHRSI=Indicators['stochrsi'][a],
+                      _4h_RSI=Indicators['rsi'][a],
+                      _4h_CCI=Indicators['cci'][a],
+                      _4h_EMA=Indicators['ema'][a],
+                      _4h_MFI=Indicators['mfi'][a],
+                      _4h_SAR=Indicators['sar'][a],
+                      _4h_BBANDS_UPPER=Indicators['bbands_upper'][a],
+                      _4h_BBANDS_MIDDLE=Indicators['bbands_middle'][a],
+                      _4h_BBANDS_LOWER=Indicators['bbands_lower'][a],
+                      _4h_MACD=Indicators['macd'][a],
+                      _4h_MACD_HISTOGRAM=Indicators['macd_histogram'][a],
+                      _4h_MACD_SIGNAL=Indicators['macd_signal'][a])
+
+            s._i_4h.append(_4hour)
             db.session.add(s)
-            db.session.add(_4h)
-    return print('1h table inserted into')
-
-def _6h_():
-
-    for a in range(len(Indicators['rsi'])):
-        with db.session.no_autoflush:
-            s = symbol(symbol_col=tickers[symbol])
-             
-            _6h = _6h(stoch_k = Indicators['stoch_k'][a],
-                stoch_d= Indicators['stoch_d'][a],
-                stochrsi= Indicators['stochrsi'][a],
-                rsi=Indicators['rsi'][a],
-                cci= Indicators['cci'][a],
-                ema= Indicators['ema'][a],
-                mfi= Indicators['mfi'][a],
-                psar= Indicators['psar'][a],
-                bbands_upper= Indicators['bbands_upper'][a],
-                bbands_middle= Indicators['bbands_middle'][a],
-                bbands_lower= Indicators['bbands_lower'][a],
-                macd= Indicators['macd'][a],
-                macd_histogram= Indicators['macd_histogram'][a],
-                macd_signal= Indicators['macd_signal'][a])
-
-            s._6h.append(_6h)
-            db.session.add(s)
-            db.session.add(_6h)
-    return print('1h table inserted into')
-
-def _12h_():
-    
-    for a in range(len(Indicators['rsi'])):
-        with db.session.no_autoflush:
-            s = symbol(symbol_col=tickers[symbol])
-                     
-            _12h = _12h(stoch_k = Indicators['stoch_k'][a],
-                stoch_d= Indicators['stoch_d'][a],
-                stochrsi= Indicators['stochrsi'][a],
-                rsi=Indicators['rsi'][a],
-                cci= Indicators['cci'][a],
-                ema= Indicators['ema'][a],
-                mfi= Indicators['mfi'][a],
-                psar= Indicators['psar'][a],
-                bbands_upper= Indicators['bbands_upper'][a],
-                bbands_middle= Indicators['bbands_middle'][a],
-                bbands_lower= Indicators['bbands_lower'][a],
-                macd= Indicators['macd'][a],
-                macd_histogram= Indicators['macd_histogram'][a],
-                macd_signal= Indicators['macd_signal'][a])
-
-            s._12h.append(_12h)
-            db.session.add(s)
-            db.session.add(_12h)
+            db.session.add(_4hour)
     return print('1h table inserted into')
 
 
-db.create_all()
-db.session.commit()
-if __name__ == '__main__':
-    app.run()
+def _6h_(Indicators,_symbol_):
+    for a in range(len(Indicators['rsi'])):
+        with db.session.no_autoflush:
+            s = symbol(symbol_col=tickers[_symbol_])
+
+            _6hour = i_6h(_6h_STOCH_K=Indicators['stoch_k'][a],
+                      _6h_STOCH_D=Indicators['stoch_d'][a],
+                      _6h_STOCHRSI=Indicators['stochrsi'][a],
+                      _6h_RSI=Indicators['rsi'][a],
+                      _6h_CCI=Indicators['cci'][a],
+                      _6h_EMA=Indicators['ema'][a],
+                      _6h_MFI=Indicators['mfi'][a],
+                      _6h_SAR=Indicators['sar'][a],
+                      _6h_BBANDS_UPPER=Indicators['bbands_upper'][a],
+                      _6h_BBANDS_MIDDLE=Indicators['bbands_middle'][a],
+                      _6h_BBANDS_LOWER=Indicators['bbands_lower'][a],
+                      _6h_MACD=Indicators['macd'][a],
+                      _6h_MACD_HISTOGRAM=Indicators['macd_histogram'][a],
+                      _6h_MACD_SIGNAL=Indicators['macd_signal'][a])
+
+            s._i_6h.append(_6hour)
+            db.session.add(s)
+            db.session.add(_6hour)
+    return print('1h table inserted into')
+
+
+def _12h_(Indicators,_symbol_):
+    for a in range(len(Indicators['rsi'])):
+        with db.session.no_autoflush:
+            s = symbol(symbol_col=tickers[_symbol_])
+
+            _12hour = i_12h(_12h_STOCH_K=Indicators['stoch_k'][a],
+                      _12h_STOCH_D=Indicators['stoch_d'][a],
+                      _12h_STOCHRSI=Indicators['stochrsi'][a],
+                      _12h_RSI=Indicators['rsi'][a],
+                      _12h_CCI=Indicators['cci'][a],
+                      _12h_EMA=Indicators['ema'][a],
+                     _12h_MFI=Indicators['mfi'][a],
+                     _12h_SAR=Indicators['sar'][a],
+                     _12h_BBANDS_UPPER=Indicators['bbands_upper'][a],
+                     _12h_BBANDS_MIDDLE=Indicators['bbands_middle'][a],
+                     _12h_BBANDS_LOWER=Indicators['bbands_lower'][a],
+                     _12h_MACD=Indicators['macd'][a],
+                    _12h_MACD_HISTOGRAM=Indicators['macd_histogram'][a],
+                    _12h_MACD_SIGNAL=Indicators['macd_signal'][a])
+
+            s._i_12h.append(_12hour)
+            db.session.add(s)
+            db.session.add(_12hour)
+    return print('1h table inserted into')
+
